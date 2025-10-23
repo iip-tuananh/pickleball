@@ -4,48 +4,46 @@
             <div class="row">
                 <div class="fot-col col-xs-12 col-md-6 col-lg-6 col-xl-3 footer-info">
                     <div class="logo-footer">
-                        <a href="/" title="SUDES SPORT">
+                        <a href="{{route('front.home-page')}}" title="{{$config->web_title}}">
                             <img width="300" height="51"
                                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"
-                                 data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/logo_footer.png?1758009149569"
-                                 alt="Sudes Sport" class="lazyload">
+                                 data-src="{{$config->image ? $config->image->path : 'https://placehold.co/300x51'}}"
+                                 alt="{{$config->web_title}}" class="lazyload">
                         </a>
                     </div>
                     <div class="des_foo">
-                        Sudes Sport - Nhà bán lẻ & phân phối thương hiệu các mặt hàng về thể thao như giày chạy
-                        bộ, đồ bơi, kính bơi, giày thể thao, đồ tập gym,... với chất lượng hàng đầu tại Việt
-                        Nam.
+                        {{$config->web_des}}
                     </div>
                     <div class="social-footer">
                         <div class="social">
-                            <a href="https://facebook.com/" target="_blank" aria-label="Facebook"
+                            <a href="{{$config->facebook}}" target="_blank" aria-label="Facebook"
                                title="Theo dõi Sudes Sport trên Facebook">
                                 <img class="lazyload" width=35 height=35 alt="Facebook"
-                                     data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/facebook_2.svg?1758009149569"
+                                     data-src="/site/images/facebook_2.svg?1758009149569"
                                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" />
                             </a>
-                            <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram"
+                            <a href="{{$config->instagram}}" target="_blank" aria-label="Instagram"
                                title="Theo dõi Sudes Sport trên Instagram">
                                 <img class="lazyload" width=35 height=35 alt="Instagram"
-                                     data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/instagram_1.svg?1758009149569"
+                                     data-src="/site/images/instagram_1.svg?1758009149569"
                                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" />
                             </a>
-                            <a href="https://shopee.vn/" target="_blank" aria-label="Shopee"
+                            <a href="{{$config->shopee}}" target="_blank" aria-label="Shopee"
                                title="Theo dõi Sudes Sport trên Shopee">
                                 <img class="lazyload" width=35 height=35 alt="Shopee"
-                                     data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/shopee.svg?1758009149569"
+                                     data-src="/site/images/shopee.svg?1758009149569"
                                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" />
                             </a>
-                            <a href="https://www.lazada.vn/" target="_blank" aria-label="Lazada"
+                            <a href="{{$config->lazada}}" target="_blank" aria-label="Lazada"
                                title="Theo dõi Sudes Sport trên Lazada">
                                 <img class="lazyload" width=35 height=35 alt="Lazada"
-                                     data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/lazada.svg?1758009149569"
+                                     data-src="/site/images/lazada.svg?1758009149569"
                                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" />
                             </a>
-                            <a href="https://www.tiktok.com/vi-VN" target="_blank" aria-label="Tiktok"
+                            <a href="{{$config->tiktok}}" target="_blank" aria-label="Tiktok"
                                title="Theo dõi Sudes Sport trên Tiktok">
                                 <img class="lazyload" width=35 height=35 alt="Tiktok"
-                                     data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/tiktok.svg?1758009149569"
+                                     data-src="/site/images/tiktok.svg?1758009149569"
                                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" />
                             </a>
                         </div>
@@ -59,32 +57,31 @@
                         <div class="content-contact clearfix">
                                     <span class="list_footer">
                                         <b>Địa chỉ: </b>
-                                        Số 70 Lữ Gia, Phường 15, Quận 11, TP. Hồ Chí Minh
+                                        {{$config->address_company}}
                                     </span>
                         </div>
                         <div class="content-contact clearfix">
                                     <span class="list_footer">
                                         <b>Điện thoại: </b>
-                                        <a title="1900 6750" href="tel:19006750">
-                                            1900 6750
+                                        <a title="{{$config->hotline}}" href="tel:{{ str_replace(' ', '', $config->hotline)}}">
+                                            {{$config->hotline}}
                                         </a>
                                     </span>
                         </div>
                         <div class="content-contact clearfix">
                                     <span class="list_footer">
                                         <b>Zalo: </b>
-                                        <a title="036 1234 567" href="https://zalo.me/0361234567">
-                                            036 1234 567
+                                        <a title="{{$config->zalo}}" href="https://zalo.me/{{ str_replace(' ', '', $config->zalo)}}">
+                                            {{$config->zalo}}
                                         </a>
                                     </span>
                         </div>
                         <div class="content-contact clearfix">
                                     <span class="list_footer">
                                         <b>Email: </b>
-                                        <a title="support@sapo.vn"
-                                           href="/cdn-cgi/l/email-protection#57242227273825231724362738792139">
-                                            <span class="__cf_email__"
-                                                  data-cfemail="9eedebeeeef1eceadeedffeef1b0e8f0">[email&#160;protected]</span>
+                                        <a title="{{$config->email}}"
+                                           href="mailto:{{$config->email}}">
+                                            {{$config->email}}
                                         </a>
                                     </span>
                         </div>
@@ -106,55 +103,32 @@
                         Chính sách
                     </h4>
                     <ul class="list-menu toggle-mn hidden-mob">
+                        @foreach ($policies as $policy)
                         <li class="li_menu">
-                            <a href="/chinh-sach-mua-hang" title="Chính sách mua hàng">Chính sách mua
-                                hàng</a>
+                            <a href="{{route('front.policy-detail', $policy->slug)}}" title="{{$policy->title}}">{{$policy->title}}</a>
                         </li>
-                        <li class="li_menu">
-                            <a href="/chinh-sach-thanh-toan" title="Chính sách thanh toán">Chính sách thanh
-                                toán</a>
-                        </li>
-                        <li class="li_menu">
-                            <a href="/chinh-sach-van-chuyen" title="Chính sách vận chuyển">Chính sách vận
-                                chuyển</a>
-                        </li>
-                        <li class="li_menu">
-                            <a href="/chinh-sach-bao-mat" title="Chính sách bảo mật">Chính sách bảo mật</a>
-                        </li>
-                        <li class="li_menu">
-                            <a href="/cam-ket-cua-hang" title="Cam kết cửa hàng">Cam kết cửa hàng</a>
-                        </li>
-                        <li class="li_menu">
-                            <a href="/chinh-sach-thanh-vien" title="Chính sách thành viên">Chính sách thành
-                                viên</a>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
                 <div class="fot-col col-xs-12 col-md-4 col-lg-4 col-xl-2 footer-click">
                     <h4 class="title-menu clicked">
-                        Hướng dẫn
+                        Danh mục
                     </h4>
                     <ul class="list-menu toggle-mn hidden-mob list-social">
                         <li class="li_menu">
-                            <a href="/huong-dan-mua-hang" title="Hướng dẫn mua hàng">Hướng dẫn mua hàng</a>
+                            <a href="{{route('front.home-page')}}" title="Trang chủ">Trang chủ</a>
                         </li>
                         <li class="li_menu">
-                            <a href="/huong-dan-doi-tra" title="Hướng dẫn đổi trả">Hướng dẫn đổi trả</a>
+                            <a href="{{route('front.about-us')}}" title="Về {{$config->web_title}}">Giới thiệu</a>
                         </li>
                         <li class="li_menu">
-                            <a href="/huong-dan-chuyen-khoan" title="Hướng dẫn chuyển khoản">Hướng dẫn
-                                chuyển khoản</a>
+                            <a href="{{route('front.contact-us')}}" title="Liên hệ chúng tôi">Liên hệ chúng tôi</a>
                         </li>
-                        <li class="li_menu">
-                            <a href="/huong-dan-tra-gop" title="Hướng dẫn trả góp">Hướng dẫn trả góp</a>
-                        </li>
-                        <li class="li_menu">
-                            <a href="/huong-dan-hoan-hang" title="Hướng dẫn hoàn hàng">Hướng dẫn hoàn
-                                hàng</a>
-                        </li>
-                        <li class="li_menu">
-                            <a href="/kiem-tra-don-hang" title="Kiểm tra đơn hàng">Kiểm tra đơn hàng</a>
-                        </li>
+                        @foreach ($post_categories as $category)
+                            <li class="li_menu">
+                                <a href="{{route('front.list-blog', $category->slug)}}" title="{{$category->name}}">{{$category->name}}</a>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
                 <div class="fot-col col-xs-12 col-md-4 col-lg-4 col-xl-2 footer-click">
@@ -165,32 +139,32 @@
                         <div class="payment-footer list-menu">
                             <div class="payment-item">
                                 <img class="lazyload" width=126 height=58 alt="MoMo"
-                                     data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/payment_1.png?1758009149569"
+                                     data-src="/site/images/payment_1.png?1758009149569"
                                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" />
                             </div>
                             <div class="payment-item">
                                 <img class="lazyload" width=126 height=58 alt="Zalo Pay"
-                                     data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/payment_2.png?1758009149569"
+                                     data-src="/site/images/payment_2.png?1758009149569"
                                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" />
                             </div>
                             <div class="payment-item">
                                 <img class="lazyload" width=126 height=58 alt="VnPay"
-                                     data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/payment_3.png?1758009149569"
+                                     data-src="/site/images/payment_3.png?1758009149569"
                                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" />
                             </div>
                             <div class="payment-item">
                                 <img class="lazyload" width=126 height=58 alt="Moca"
-                                     data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/payment_4.png?1758009149569"
+                                     data-src="/site/images/payment_4.png?1758009149569"
                                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" />
                             </div>
                             <div class="payment-item">
                                 <img class="lazyload" width=126 height=58 alt="Visa"
-                                     data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/payment_5.png?1758009149569"
+                                     data-src="/site/images/payment_5.png?1758009149569"
                                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" />
                             </div>
                             <div class="payment-item">
                                 <img class="lazyload" width=126 height=58 alt="ATM"
-                                     data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/payment_6.png?1758009149569"
+                                     data-src="/site/images/payment_6.png?1758009149569"
                                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" />
                             </div>
                         </div>
@@ -202,7 +176,7 @@
                         <div class="certifi-footer">
                             <a href="#" title="Chứng nhận 1" target="_blank">
                                 <img width=335 height=108 class="lazyload" alt="Chứng nhận 1"
-                                     data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/certifi_1.png?1758009149569"
+                                     data-src="/site/images/certifi_1.png?1758009149569"
                                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" />
                             </a>
                         </div>
@@ -216,12 +190,9 @@
             <div class="row tablet">
                 <div id="copyright" class="col-lg-12 col-md-12 col-xs-12 fot_copyright">
                             <span class="wsp">
-                                <span class="mobile">© Bản quyền thuộc về <b>Sudes Team</b>
-                                    <span class="dash"> | </span>
+                                <span class="mobile">© Bản quyền thuộc về <b>{{$config->web_title}}</b>
+
                                 </span>
-                                <span class="opacity1">Cung cấp bởi</span>
-                                <a href="https://www.sapo.vn/?utm_campaign=cpn:kho_theme-plm:footer&utm_source=Tu_nhien&utm_medium=referral&utm_content=fm:text_link-km:-sz:&utm_term=&campaign=kho_theme-sapo"
-                                   rel="nofollow" title="Sapo" target="_blank">Sapo</a>
                             </span>
                 </div>
             </div>
@@ -248,7 +219,7 @@
                             </div>
                         </div>
                         <div class="item phone">
-                            <a href="tel:19006750">
+                            <a href="tel:{{ str_replace(' ', '', $config->hotline)}}">
                                         <span class="img">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                                 <path fill="currentColor"
@@ -261,13 +232,13 @@
                                         Hotline:
                                     </b>
                                     <span class="arcu-item-subtitle">
-                                                19006750
+                                        {{$config->hotline}}
                                             </span>
                                 </div>
                             </a>
                         </div>
                         <div class="item zalo">
-                            <a target="_blank" href="https://zalo.me/0123456789">
+                            <a target="_blank" href="https://zalo.me/{{ str_replace(' ', '', $config->zalo)}}">
                                         <span class="img">
                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                  xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
@@ -288,13 +259,13 @@
                                         Zalo chat:
                                     </b>
                                     <span class="arcu-item-subtitle">
-                                                Tài khoản Zalo: 0123 456 789
+                                        {{$config->zalo}}
                                             </span>
                                 </div>
                             </a>
                         </div>
                         <div class="item mess">
-                            <a target="_blank" href="https://m.me/sapowebvietnam">
+                            <a target="_blank" href="{{$config->facebook}}">
                                         <span class="img">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                  fill="currentColor" class="bi bi-messenger" viewBox="0 0 16 16">
@@ -307,12 +278,12 @@
                                         Messenger:
                                     </b>
                                     <span class="arcu-item-subtitle">
-                                                m.me/sapowebvietnam
+                                                {{$config->facebook}}
                                             </span>
                                 </div>
                             </a>
                         </div>
-                        <div class="item map">
+                        {{-- <div class="item map">
                             <a target="_blank" href="/he-thong-cua-hang">
                                         <span class="img">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -332,7 +303,7 @@
                                             </span>
                                 </div>
                             </a>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="out-circle">
                         <div class="main-icon">
