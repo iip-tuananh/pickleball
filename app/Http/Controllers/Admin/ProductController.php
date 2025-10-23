@@ -153,8 +153,8 @@ class ProductController extends Controller
 			$object->syncDocuments($request->attachments, 'products/attachments/');
             if($request->tag_ids) $object->addTags($request->tag_ids);
 
-            if($request->input('attributes')) {
-                $object->syncAttributes($request->input('attributes'));
+            if($request->input('attrs')) {
+                $object->syncAttributes($request->input('attrs'));
             }
 
             if(isset($request->all()['videos'])) {
@@ -243,8 +243,11 @@ class ProductController extends Controller
             $object->syncDocuments($request->attachments, 'products/attachments/');
 
             if($request->tag_ids) $object->updateTags($request->tag_ids);
-            if($request->input('attributes')) {
-                $object->syncAttributes($request->input('attributes'));
+
+
+            AttributeValue::query()->where('product_id', $object->id)->delete();
+            if($request->input('attrs')) {
+                $object->syncAttributes($request->input('attrs'));
             }
 
             if(isset($request->all()['videos'])) {

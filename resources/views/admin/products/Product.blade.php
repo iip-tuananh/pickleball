@@ -1,11 +1,15 @@
 @include('admin.products.ProductGallery')
 @include('admin.products.ProductAttribute')
 @include('admin.products.ProductVideo')
+@include('admin.products.Attri')
+
+
 <script>
     class Product extends BaseClass {
         no_set = [];
         all_categories = @json(\App\Model\Admin\Category::getForSelect());
         all_units = @json(\App\Model\Common\Unit::getForSelect());
+        all_attributes = @json(\App\Model\Admin\Attribute::getForSelect());
 
         before(form) {
             this.image = {};
@@ -13,6 +17,8 @@
             if (!this.type) this.type = 0;
             this.attribute_values = form.attribute_values || [];
             this.videos = form.videos || [];
+            this._attrs = [];
+
         }
 
         after(form) {
@@ -117,21 +123,31 @@
             this._galleries.splice(index, 1);
         }
 
-        set attribute_values(value) {
-            this._attributes = (value || []).map(val => new ProductAttribute(val, this));
+        // attribute
+        set attrs(value) {
+            this._attrs = (value || []).map(val => new Attri(val, this))
         }
 
-        get attribute_values() {
-            return this._attributes;
+        get attrs() {
+            return this._attrs || []
         }
 
-        addAttribute() {
-            this._attributes.push(new ProductAttribute({}, this));
+        addAttributes(value) {
+            const exists = this._attrs.some(attrWrapper =>
+                attrWrapper.id === value.id
+            );
+            if (exists) {
+                toastr.warning('Thuộc tính này đã được thêm');
+                return;
+            }
+
+            this._attrs.push(new Attri(value, this));
         }
 
-        removeAttribute(index) {
-            this._attributes.splice(index, 1);
+        removeAttributes(index) {
+            this._attrs.splice(index, 1)
         }
+        // end attribute
 
         set videos(value) {
             this._videos = (value || []).map(val => new ProductVideo(val, this));
@@ -226,6 +242,8 @@
                 button_type: this.button_type,
                 gift: this.gift,
                 unit_id: this.unit_id,
+                attrs: this._attrs.map(val => val.submit_data),
+
             }
 
             data = jsonToFormData(data);

@@ -37,3 +37,68 @@
     <link rel="icon" href="{{$config->favicon->path ?? ''}}" type="image/x-icon">
     <!-- / Yoast SEO plugin. -->
 
+
+    <link rel="preload" as="script" href="/site/js/jquery.js?1758009149569" />
+    <script src="/site/js/jquery.js?1758009149569" type="text/javascript"></script>
+    <link rel="preload" as="script" href="/site/js/swiper.js?1758009149569" />
+    <script src="/site/js/swiper.js?1758009149569" type="text/javascript"></script>
+    <link rel="preload" as="script" href="/site/js/lazy.js?1758009149569" />
+    <script src="/site/js/lazy.js?1758009149569" type="text/javascript"></script>
+    <link rel="preload" as='style' type="text/css" href="/site/css/fonts.scss.css?1758009149569">
+    <link rel="preload" as='style' type="text/css" href="/site/css/main.scss.css?1758009149569">
+    <link rel="preload" as='style' type="text/css" href="/site/css/index.scss.css?1758009149569">
+    <link rel="preload" as='style' type="text/css" href="/site/css/bootstrap-4-3-min.css?1758009149569">
+    <link rel="preload" as='style' type="text/css" href="/site/css/quickviews_popup_cart.scss.css?1758009149569">
+    <style>
+        :root {
+            --mainColor: #002d3a;
+            --subColor: #a2ff00;
+            --bodyColor: #ffffff;
+            --textColor: #333333;
+            --hoverColor: #77e322;
+            --price: #c30000;
+        }
+    </style>
+    <link href="/site/css/fonts.scss.css?1758009149569" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="/site/css/bootstrap-4-3-min.css?1758009149569">
+    <link href="/site/css/main.scss.css?1758009149569" rel="stylesheet" type="text/css" media="all" />
+    <link href="/site/css/index.scss.css?1758009149569" rel="stylesheet" type="text/css" media="all" />
+
+
+
+    <link href="/site/css/breadcrumb_style.scss.css?1758009149569"
+          rel="stylesheet" type="text/css" media="all"/>
+
+    <link href="/site/css/quickviews_popup_cart.scss.css?1758009149569" rel="stylesheet" type="text/css" media="all" />
+    <script>
+        (function() {
+            function asyncLoad() {
+                var urls = [];
+                for (var i = 0; i < urls.length; i++) {
+                    var s = document.createElement('script');
+                    s.type = 'text/javascript';
+                    s.async = true;
+                    s.src = urls[i];
+                    var x = document.getElementsByTagName('script')[0];
+                    x.parentNode.insertBefore(s, x);
+                }
+            };
+            window.attachEvent ? window.attachEvent('onload', asyncLoad) : window.addEventListener('load', asyncLoad,
+                false);
+        })();
+    </script>
+    <script>
+        $(document).ready(function($) {
+            awe_lazyloadImage();
+        });
+
+        function awe_lazyloadImage() {
+            var ll = new LazyLoad({
+                elements_selector: ".lazyload",
+                load_delay: 100,
+                threshold: 0
+            });
+        }
+        window.awe_lazyloadImage = awe_lazyloadImage;
+    </script>
+

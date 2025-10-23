@@ -1,213 +1,373 @@
 <footer class="footer">
-    <div class="mid-footer">
+    <div class="main-footer">
         <div class="container">
             <div class="row">
-                <div class="col-xl-3 col-lg-3 col-md-6 col-12 link-list">
-                    <h4 class="title-menu">
-                        Thông tin công ty
-                    </h4>
-                    <div class="des-footer">
-                        {{ $config->web_des }}
-                    </div>
-                    <h4 class="title-menu">
-                        Theo dõi chúng tôi
-                    </h4>
-                    <div class="list-social">
-                        <a href="{{ $config->facebook }}" class="social-button" title="Facebook">
-                            <img src="/site/images/facebook.png" alt="Facebook">
-                        </a>
-                        <a href="{{ $config->twitter }}" class="social-button" title="Twitter">
-                            <img src="/site/images/twitter.png" alt="Twitter">
-                        </a>
-                        <a href="{{ $config->linkedin }}" class="social-button" title="Linkedin">
-                            <img src="/site/images/linkedin.png" alt="Linkedin">
-                        </a>
-                        <a href="{{ $config->youtube }}" class="social-button" title="Youtube">
-                            <img src="/site/images/youtube.png" alt="Youtube">
-                        </a>
-                        <a href="{{ $config->instagram }}" class="social-button" title="Instagram">
-                            <img src="/site/images/instagram.png" alt="Instagram">
+                <div class="fot-col col-xs-12 col-md-6 col-lg-6 col-xl-3 footer-info">
+                    <div class="logo-footer">
+                        <a href="/" title="SUDES SPORT">
+                            <img width="300" height="51"
+                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"
+                                 data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/logo_footer.png?1758009149569"
+                                 alt="Sudes Sport" class="lazyload">
                         </a>
                     </div>
-                </div>
-                <div class="col-xl-3 col-lg-3 col-md-6 col-12 link-list col-footer">
-                    <h4 class="title-menu">
-                        Về chúng tôi
-                        <span class="Collapsible__Plus"></span>
-                    </h4>
-                    <div class="hidden-mobile">
-                        <div class="d-flex" style="gap: 20%;">
-                            <ul class="list-menu">
-                                <li><a href="{{ route('front.home-page') }}" title="Trang chủ">Trang chủ</a></li>
-                                <li><a href="{{ route('front.about-us') }}" title="Giới thiệu">Giới thiệu</a></li>
-                                @foreach ($post_categories as $postCategory)
-                                    <li><a href="{{ route('front.list-blog', $postCategory->slug) }}"
-                                            title="{{ $postCategory->name }}">{{ $postCategory->name }}</a></li>
-                                @endforeach
-                                <li><a href="{{ route('front.contact-us') }}" title="Liên hệ">Liên hệ</a></li>
-                            </ul>
-                            <ul class="list-menu">
-                                @foreach ($product_categories as $category)
-                                    <li><a href="{{ route('front.show-product-category', $category->slug) }}"
-                                            title="{{ $category->name }}">{{ $category->name }}</a></li>
-                                @endforeach
-                            </ul>
+                    <div class="des_foo">
+                        Sudes Sport - Nhà bán lẻ & phân phối thương hiệu các mặt hàng về thể thao như giày chạy
+                        bộ, đồ bơi, kính bơi, giày thể thao, đồ tập gym,... với chất lượng hàng đầu tại Việt
+                        Nam.
+                    </div>
+                    <div class="social-footer">
+                        <div class="social">
+                            <a href="https://facebook.com/" target="_blank" aria-label="Facebook"
+                               title="Theo dõi Sudes Sport trên Facebook">
+                                <img class="lazyload" width=35 height=35 alt="Facebook"
+                                     data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/facebook_2.svg?1758009149569"
+                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" />
+                            </a>
+                            <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram"
+                               title="Theo dõi Sudes Sport trên Instagram">
+                                <img class="lazyload" width=35 height=35 alt="Instagram"
+                                     data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/instagram_1.svg?1758009149569"
+                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" />
+                            </a>
+                            <a href="https://shopee.vn/" target="_blank" aria-label="Shopee"
+                               title="Theo dõi Sudes Sport trên Shopee">
+                                <img class="lazyload" width=35 height=35 alt="Shopee"
+                                     data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/shopee.svg?1758009149569"
+                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" />
+                            </a>
+                            <a href="https://www.lazada.vn/" target="_blank" aria-label="Lazada"
+                               title="Theo dõi Sudes Sport trên Lazada">
+                                <img class="lazyload" width=35 height=35 alt="Lazada"
+                                     data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/lazada.svg?1758009149569"
+                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" />
+                            </a>
+                            <a href="https://www.tiktok.com/vi-VN" target="_blank" aria-label="Tiktok"
+                               title="Theo dõi Sudes Sport trên Tiktok">
+                                <img class="lazyload" width=35 height=35 alt="Tiktok"
+                                     data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/tiktok.svg?1758009149569"
+                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" />
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-2 col-lg-3 col-md-6 col-12 link-list col-footer">
+                <div class="fot-col col-xs-12 col-md-6 col-lg-6 col-xl-3 footer-contact">
                     <h4 class="title-menu">
-                        Hỗ trợ khách hàng
-                        <span class="Collapsible__Plus"></span>
+                        Liên hệ
                     </h4>
-                    <div class="list-menu hidden-mobile">
-                        <ul class="list-menu">
-                            @foreach ($policies as $policy)
-                                <li><a href="{{ route('front.policy-detail', $policy->slug) }}"
-                                        title="{{ $policy->title }}">{{ $policy->title }}</a></li>
-                            @endforeach
-                        </ul>
+                    <div class="list-menu toggle-mn">
+                        <div class="content-contact clearfix">
+                                    <span class="list_footer">
+                                        <b>Địa chỉ: </b>
+                                        Số 70 Lữ Gia, Phường 15, Quận 11, TP. Hồ Chí Minh
+                                    </span>
+                        </div>
+                        <div class="content-contact clearfix">
+                                    <span class="list_footer">
+                                        <b>Điện thoại: </b>
+                                        <a title="1900 6750" href="tel:19006750">
+                                            1900 6750
+                                        </a>
+                                    </span>
+                        </div>
+                        <div class="content-contact clearfix">
+                                    <span class="list_footer">
+                                        <b>Zalo: </b>
+                                        <a title="036 1234 567" href="https://zalo.me/0361234567">
+                                            036 1234 567
+                                        </a>
+                                    </span>
+                        </div>
+                        <div class="content-contact clearfix">
+                                    <span class="list_footer">
+                                        <b>Email: </b>
+                                        <a title="support@sapo.vn"
+                                           href="/cdn-cgi/l/email-protection#57242227273825231724362738792139">
+                                            <span class="__cf_email__"
+                                                  data-cfemail="9eedebeeeef1eceadeedffeef1b0e8f0">[email&#160;protected]</span>
+                                        </a>
+                                    </span>
+                        </div>
                     </div>
+                    <a class="btn btn-primary btn-stores" href="/he-thong-cua-hang"
+                       title="Chuỗi cửa hàng Sudes Sport">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                             fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z" />
+                            <path
+                                d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z" />
+                        </svg>
+                        <span>Chuỗi cửa hàng Sudes Sport</span>
+                    </a>
                 </div>
-                <div class="col-xl-4 col-lg-3 col-md-6 col-12 link-list">
-                    <h4 class="title-menu">
-                        Thông tin liên hệ
+                <div class="fot-col col-xs-12 col-md-4 col-lg-4 col-xl-2 footer-click">
+                    <h4 class="title-menu clicked">
+                        Chính sách
                     </h4>
-                    <div class="list-menu">
-                        <div class="group-address">
-                            <ul>
-                                @if($config->address_company)
-                                <li>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        viewBox="0 0 13 19" fill="none">
-                                        <path
-                                            d="M6.46532 0.686035C3.26765 0.686035 0.651367 3.30231 0.651367 6.49999C0.651367 8.08776 2.2 10.9476 2.27636 11.0877C2.27881 11.0922 2.28058 11.0952 2.28318 11.0996L5.87299 17.1867C6.06347 17.5097 6.52849 17.5159 6.72747 17.198L10.4732 11.2154C10.4757 11.2113 10.4773 11.2088 10.4799 11.2049C10.562 11.0807 12.3374 8.37556 12.3374 6.55813C12.3374 3.30231 9.72113 0.686035 6.46532 0.686035ZM6.46532 9.69766C4.60486 9.69766 3.09323 8.18603 3.09323 6.32557C3.09323 4.4651 4.60486 2.95348 6.46532 2.95348C8.32579 2.95348 9.83741 4.4651 9.83741 6.32557C9.77927 8.24417 8.32579 9.69766 6.46532 9.69766Z"
-                                            stroke="var(--mainColor)" stroke-width="1.25" stroke-miterlimit="10"></path>
-                                    </svg>
-                                    <span>CS1: {{ $config->address_company }}</span>
-                                </li>
-                                @endif
-                                @if($config->address_company_2)
-                                <li>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        viewBox="0 0 13 19" fill="none">
-                                        <path
-                                            d="M6.46532 0.686035C3.26765 0.686035 0.651367 3.30231 0.651367 6.49999C0.651367 8.08776 2.2 10.9476 2.27636 11.0877C2.27881 11.0922 2.28058 11.0952 2.28318 11.0996L5.87299 17.1867C6.06347 17.5097 6.52849 17.5159 6.72747 17.198L10.4732 11.2154C10.4757 11.2113 10.4773 11.2088 10.4799 11.2049C10.562 11.0807 12.3374 8.37556 12.3374 6.55813C12.3374 3.30231 9.72113 0.686035 6.46532 0.686035ZM6.46532 9.69766C4.60486 9.69766 3.09323 8.18603 3.09323 6.32557C3.09323 4.4651 4.60486 2.95348 6.46532 2.95348C8.32579 2.95348 9.83741 4.4651 9.83741 6.32557C9.77927 8.24417 8.32579 9.69766 6.46532 9.69766Z"
-                                            stroke="var(--mainColor)" stroke-width="1.25" stroke-miterlimit="10"></path>
-                                    </svg>
-                                    <span>CS2: {{ $config->address_company_2 }}</span>
-                                </li>
-                                @endif
-                                @if($config->address_company_3)
-                                <li>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        viewBox="0 0 13 19" fill="none">
-                                        <path
-                                            d="M6.46532 0.686035C3.26765 0.686035 0.651367 3.30231 0.651367 6.49999C0.651367 8.08776 2.2 10.9476 2.27636 11.0877C2.27881 11.0922 2.28058 11.0952 2.28318 11.0996L5.87299 17.1867C6.06347 17.5097 6.52849 17.5159 6.72747 17.198L10.4732 11.2154C10.4757 11.2113 10.4773 11.2088 10.4799 11.2049C10.562 11.0807 12.3374 8.37556 12.3374 6.55813C12.3374 3.30231 9.72113 0.686035 6.46532 0.686035ZM6.46532 9.69766C4.60486 9.69766 3.09323 8.18603 3.09323 6.32557C3.09323 4.4651 4.60486 2.95348 6.46532 2.95348C8.32579 2.95348 9.83741 4.4651 9.83741 6.32557C9.77927 8.24417 8.32579 9.69766 6.46532 9.69766Z"
-                                            stroke="var(--mainColor)" stroke-width="1.25" stroke-miterlimit="10"></path>
-                                    </svg>
-                                    <span>CS3: {{ $config->address_company_3 }}</span>
-                                </li>
-                                @endif
-                                @if($config->address_company_4)
-                                <li>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        viewBox="0 0 13 19" fill="none">
-                                        <path
-                                            d="M6.46532 0.686035C3.26765 0.686035 0.651367 3.30231 0.651367 6.49999C0.651367 8.08776 2.2 10.9476 2.27636 11.0877C2.27881 11.0922 2.28058 11.0952 2.28318 11.0996L5.87299 17.1867C6.06347 17.5097 6.52849 17.5159 6.72747 17.198L10.4732 11.2154C10.4757 11.2113 10.4773 11.2088 10.4799 11.2049C10.562 11.0807 12.3374 8.37556 12.3374 6.55813C12.3374 3.30231 9.72113 0.686035 6.46532 0.686035ZM6.46532 9.69766C4.60486 9.69766 3.09323 8.18603 3.09323 6.32557C3.09323 4.4651 4.60486 2.95348 6.46532 2.95348C8.32579 2.95348 9.83741 4.4651 9.83741 6.32557C9.77927 8.24417 8.32579 9.69766 6.46532 9.69766Z"
-                                            stroke="var(--mainColor)" stroke-width="1.25" stroke-miterlimit="10"></path>
-                                    </svg>
-                                    <span>CS4: {{ $config->address_company_4 }}</span>
-                                </li>
-                                @endif
-                                @if($config->address_company_5)
-                                <li>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        viewBox="0 0 13 19" fill="none">
-                                        <path
-                                            d="M6.46532 0.686035C3.26765 0.686035 0.651367 3.30231 0.651367 6.49999C0.651367 8.08776 2.2 10.9476 2.27636 11.0877C2.27881 11.0922 2.28058 11.0952 2.28318 11.0996L5.87299 17.1867C6.06347 17.5097 6.52849 17.5159 6.72747 17.198L10.4732 11.2154C10.4757 11.2113 10.4773 11.2088 10.4799 11.2049C10.562 11.0807 12.3374 8.37556 12.3374 6.55813C12.3374 3.30231 9.72113 0.686035 6.46532 0.686035ZM6.46532 9.69766C4.60486 9.69766 3.09323 8.18603 3.09323 6.32557C3.09323 4.4651 4.60486 2.95348 6.46532 2.95348C8.32579 2.95348 9.83741 4.4651 9.83741 6.32557C9.77927 8.24417 8.32579 9.69766 6.46532 9.69766Z"
-                                            stroke="var(--mainColor)" stroke-width="1.25" stroke-miterlimit="10"></path>
-                                    </svg>
-                                    <span>CS5: {{ $config->address_company_5 }}</span>
-                                </li>
-                                @endif
-                                @if($config->address_company_6)
-                                <li>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        viewBox="0 0 13 19" fill="none">
-                                        <path
-                                            d="M6.46532 0.686035C3.26765 0.686035 0.651367 3.30231 0.651367 6.49999C0.651367 8.08776 2.2 10.9476 2.27636 11.0877C2.27881 11.0922 2.28058 11.0952 2.28318 11.0996L5.87299 17.1867C6.06347 17.5097 6.52849 17.5159 6.72747 17.198L10.4732 11.2154C10.4757 11.2113 10.4773 11.2088 10.4799 11.2049C10.562 11.0807 12.3374 8.37556 12.3374 6.55813C12.3374 3.30231 9.72113 0.686035 6.46532 0.686035ZM6.46532 9.69766C4.60486 9.69766 3.09323 8.18603 3.09323 6.32557C3.09323 4.4651 4.60486 2.95348 6.46532 2.95348C8.32579 2.95348 9.83741 4.4651 9.83741 6.32557C9.77927 8.24417 8.32579 9.69766 6.46532 9.69766Z"
-                                            stroke="var(--mainColor)" stroke-width="1.25" stroke-miterlimit="10"></path>
-                                    </svg>
-                                    <span>CS6: {{ $config->address_company_6 }}</span>
-                                </li>
-                                @endif
-                                @if($config->address_center_insurance)
-                                <li>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        viewBox="0 0 13 19" fill="none">
-                                        <path
-                                            d="M6.46532 0.686035C3.26765 0.686035 0.651367 3.30231 0.651367 6.49999C0.651367 8.08776 2.2 10.9476 2.27636 11.0877C2.27881 11.0922 2.28058 11.0952 2.28318 11.0996L5.87299 17.1867C6.06347 17.5097 6.52849 17.5159 6.72747 17.198L10.4732 11.2154C10.4757 11.2113 10.4773 11.2088 10.4799 11.2049C10.562 11.0807 12.3374 8.37556 12.3374 6.55813C12.3374 3.30231 9.72113 0.686035 6.46532 0.686035ZM6.46532 9.69766C4.60486 9.69766 3.09323 8.18603 3.09323 6.32557C3.09323 4.4651 4.60486 2.95348 6.46532 2.95348C8.32579 2.95348 9.83741 4.4651 9.83741 6.32557C9.77927 8.24417 8.32579 9.69766 6.46532 9.69766Z"
-                                            stroke="var(--mainColor)" stroke-width="1.25" stroke-miterlimit="10"></path>
-                                    </svg>
-                                    <span>Xưởng SX: {{ $config->address_center_insurance }}</span>
-                                </li>
-                                @endif
-                                <li>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        fill="var(--mainColor)" class="bi bi-telephone" viewBox="0 0 16 16">
-                                        <path
-                                            d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z">
-                                        </path>
-                                    </svg>
-                                    <a class="tel" href="tel:{{ str_replace(' ', '', $config->hotline) }}"
-                                        title="{{ $config->hotline }}">{{ $config->hotline }}</a>
-                                </li>
-                                <li>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16"
-                                        height="16" fill="var(--mainColor)">
-                                        <path
-                                            d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18a2 2 0 0 0 2 2h16c1.1 0 2-.9 2-2V6a2 2 0 0 0-2-2zm0 14H4V6h16v12zM6 12h5v2H6zm0-4h12v2H6z" />
-                                    </svg>
-
-                                    <a class="tel" href="javascript:void(0)"
-                                        title="MST: {{ $config->tax_code }}">MST:
-                                        {{ $config->tax_code }}</a>
-                                </li>
-                                @if ($config->email)
-                                    @foreach (explode("\n", $config->email) as $email)
-                                        <li>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="var(--mainColor)" class="bi bi-envelope" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z">
-                                                </path>
-                                            </svg>
-                                            <a href="mailto:{{ trim($email) }}"
-                                                title="{{ $email }}">{{ trim($email) }}</a>
-                                        </li>
-                                    @endforeach
-                                @endif
-                            </ul>
+                    <ul class="list-menu toggle-mn hidden-mob">
+                        <li class="li_menu">
+                            <a href="/chinh-sach-mua-hang" title="Chính sách mua hàng">Chính sách mua
+                                hàng</a>
+                        </li>
+                        <li class="li_menu">
+                            <a href="/chinh-sach-thanh-toan" title="Chính sách thanh toán">Chính sách thanh
+                                toán</a>
+                        </li>
+                        <li class="li_menu">
+                            <a href="/chinh-sach-van-chuyen" title="Chính sách vận chuyển">Chính sách vận
+                                chuyển</a>
+                        </li>
+                        <li class="li_menu">
+                            <a href="/chinh-sach-bao-mat" title="Chính sách bảo mật">Chính sách bảo mật</a>
+                        </li>
+                        <li class="li_menu">
+                            <a href="/cam-ket-cua-hang" title="Cam kết cửa hàng">Cam kết cửa hàng</a>
+                        </li>
+                        <li class="li_menu">
+                            <a href="/chinh-sach-thanh-vien" title="Chính sách thành viên">Chính sách thành
+                                viên</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="fot-col col-xs-12 col-md-4 col-lg-4 col-xl-2 footer-click">
+                    <h4 class="title-menu clicked">
+                        Hướng dẫn
+                    </h4>
+                    <ul class="list-menu toggle-mn hidden-mob list-social">
+                        <li class="li_menu">
+                            <a href="/huong-dan-mua-hang" title="Hướng dẫn mua hàng">Hướng dẫn mua hàng</a>
+                        </li>
+                        <li class="li_menu">
+                            <a href="/huong-dan-doi-tra" title="Hướng dẫn đổi trả">Hướng dẫn đổi trả</a>
+                        </li>
+                        <li class="li_menu">
+                            <a href="/huong-dan-chuyen-khoan" title="Hướng dẫn chuyển khoản">Hướng dẫn
+                                chuyển khoản</a>
+                        </li>
+                        <li class="li_menu">
+                            <a href="/huong-dan-tra-gop" title="Hướng dẫn trả góp">Hướng dẫn trả góp</a>
+                        </li>
+                        <li class="li_menu">
+                            <a href="/huong-dan-hoan-hang" title="Hướng dẫn hoàn hàng">Hướng dẫn hoàn
+                                hàng</a>
+                        </li>
+                        <li class="li_menu">
+                            <a href="/kiem-tra-don-hang" title="Kiểm tra đơn hàng">Kiểm tra đơn hàng</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="fot-col col-xs-12 col-md-4 col-lg-4 col-xl-2 footer-click">
+                    <h4 class="title-menu">
+                        Hỗ trợ thanh toán
+                    </h4>
+                    <div class="block-payment">
+                        <div class="payment-footer list-menu">
+                            <div class="payment-item">
+                                <img class="lazyload" width=126 height=58 alt="MoMo"
+                                     data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/payment_1.png?1758009149569"
+                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" />
+                            </div>
+                            <div class="payment-item">
+                                <img class="lazyload" width=126 height=58 alt="Zalo Pay"
+                                     data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/payment_2.png?1758009149569"
+                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" />
+                            </div>
+                            <div class="payment-item">
+                                <img class="lazyload" width=126 height=58 alt="VnPay"
+                                     data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/payment_3.png?1758009149569"
+                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" />
+                            </div>
+                            <div class="payment-item">
+                                <img class="lazyload" width=126 height=58 alt="Moca"
+                                     data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/payment_4.png?1758009149569"
+                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" />
+                            </div>
+                            <div class="payment-item">
+                                <img class="lazyload" width=126 height=58 alt="Visa"
+                                     data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/payment_5.png?1758009149569"
+                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" />
+                            </div>
+                            <div class="payment-item">
+                                <img class="lazyload" width=126 height=58 alt="ATM"
+                                     data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/payment_6.png?1758009149569"
+                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="block-certifi">
+                        <h4 class="title-menu">
+                            Được chứng nhận bởi
+                        </h4>
+                        <div class="certifi-footer">
+                            <a href="#" title="Chứng nhận 1" target="_blank">
+                                <img width=335 height=108 class="lazyload" alt="Chứng nhận 1"
+                                     data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/certifi_1.png?1758009149569"
+                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" />
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div id="copyright" class="copyright">
+    <div class="bg-footer-bottom copyright clearfix">
         <div class="container">
-            <div class="wsp">
-                © Bản quyền thuộc về {{ $config->web_title }}
+            <div class="row tablet">
+                <div id="copyright" class="col-lg-12 col-md-12 col-xs-12 fot_copyright">
+                            <span class="wsp">
+                                <span class="mobile">© Bản quyền thuộc về <b>Sudes Team</b>
+                                    <span class="dash"> | </span>
+                                </span>
+                                <span class="opacity1">Cung cấp bởi</span>
+                                <a href="https://www.sapo.vn/?utm_campaign=cpn:kho_theme-plm:footer&utm_source=Tu_nhien&utm_medium=referral&utm_content=fm:text_link-km:-sz:&utm_term=&campaign=kho_theme-sapo"
+                                   rel="nofollow" title="Sapo" target="_blank">Sapo</a>
+                            </span>
+                </div>
+            </div>
+            <div class="footer-widget">
+                <a href="#" class="backtop" title="Lên đầu trang">
+                    <i class="icon-up">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                             fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                  d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z" />
+                        </svg>
+                    </i>
+                </a>
+                <div class="main-widget">
+                    <div class="def-content unsee element">
+                        <div class="def-header">
+                            Liên hệ với chúng tôi
+                            <div class="close-icon" title="Đóng">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                     fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                    <path
+                                        d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="item phone">
+                            <a href="tel:19006750">
+                                        <span class="img">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                                <path fill="currentColor"
+                                                      d="M493.4 24.6l-104-24c-11.3-2.6-22.9 3.3-27.5 13.9l-48 112c-4.2 9.8-1.4 21.3 6.9 28l60.6 49.6c-36 76.7-98.9 140.5-177.2 177.2l-49.6-60.6c-6.8-8.3-18.2-11.1-28-6.9l-112 48C3.9 366.5-2 378.1.6 389.4l24 104C27.1 504.2 36.7 512 48 512c256.1 0 464-207.5 464-464 0-11.2-7.7-20.9-18.6-23.4z">
+                                                </path>
+                                            </svg>
+                                        </span>
+                                <div class="detail">
+                                    <b class="arcu-item-title">
+                                        Hotline:
+                                    </b>
+                                    <span class="arcu-item-subtitle">
+                                                19006750
+                                            </span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item zalo">
+                            <a target="_blank" href="https://zalo.me/0123456789">
+                                        <span class="img">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
+                                                 viewBox="0 0 614.501 613.667" xml:space="preserve">
+                                                <path fill="currentColor"
+                                                      d="M464.721,301.399c-13.984-0.014-23.707,11.478-23.944,28.312c-0.251,17.771,9.168,29.208,24.037,29.202   c14.287-0.007,23.799-11.095,24.01-27.995C489.028,313.536,479.127,301.399,464.721,301.399z">
+                                                </path>
+                                                <path fill="currentColor"
+                                                      d="M291.83,301.392c-14.473-0.316-24.578,11.603-24.604,29.024c-0.02,16.959,9.294,28.259,23.496,28.502   c15.072,0.251,24.592-10.87,24.539-28.707C315.214,313.318,305.769,301.696,291.83,301.392z">
+                                                </path>
+                                                <path fill="currentColor"
+                                                      d="M310.518,3.158C143.102,3.158,7.375,138.884,7.375,306.3s135.727,303.142,303.143,303.142   c167.415,0,303.143-135.727,303.143-303.142S477.933,3.158,310.518,3.158z M217.858,391.083   c-33.364,0.818-66.828,1.353-100.133-0.343c-21.326-1.095-27.652-18.647-14.248-36.583c21.55-28.826,43.886-57.065,65.792-85.621   c2.546-3.305,6.214-5.996,7.15-12.705c-16.609,0-32.784,0.04-48.958-0.013c-19.195-0.066-28.278-5.805-28.14-17.652   c0.132-11.768,9.175-17.329,28.397-17.348c25.159-0.026,50.324-0.06,75.476,0.026c9.637,0.033,19.604,0.105,25.304,9.789   c6.22,10.561,0.284,19.512-5.646,27.454c-21.26,28.497-43.015,56.624-64.559,84.902c-2.599,3.41-5.119,6.88-9.453,12.725   c23.424,0,44.123-0.053,64.816,0.026c8.674,0.026,16.662,1.873,19.941,11.267C237.892,379.329,231.368,390.752,217.858,391.083z    M350.854,330.211c0,13.417-0.093,26.841,0.039,40.265c0.073,7.599-2.599,13.647-9.512,17.084   c-7.296,3.642-14.71,3.028-20.304-2.968c-3.997-4.281-6.214-3.213-10.488-0.422c-17.955,11.728-39.908,9.96-56.597-3.866   c-29.928-24.789-30.026-74.803-0.211-99.776c16.194-13.562,39.592-15.462,56.709-4.143c3.951,2.619,6.201,4.815,10.396-0.053   c5.39-6.267,13.055-6.761,20.271-3.357c7.454,3.509,9.935,10.165,9.776,18.265C350.67,304.222,350.86,317.217,350.854,330.211z    M395.617,369.579c-0.118,12.837-6.398,19.783-17.196,19.908c-10.779,0.132-17.593-6.966-17.646-19.512   c-0.179-43.352-0.185-86.696,0.007-130.041c0.059-12.256,7.302-19.921,17.896-19.222c11.425,0.752,16.992,7.448,16.992,18.833   c0,22.104,0,44.216,0,66.327C395.677,327.105,395.828,348.345,395.617,369.579z M463.981,391.868   c-34.399-0.336-59.037-26.444-58.786-62.289c0.251-35.66,25.304-60.713,60.383-60.396c34.631,0.304,59.374,26.306,58.998,61.986   C524.207,366.492,498.534,392.205,463.981,391.868z">
+                                                </path>
+                                            </svg>
+                                        </span>
+                                <div class="detail">
+                                    <b class="arcu-item-title">
+                                        Zalo chat:
+                                    </b>
+                                    <span class="arcu-item-subtitle">
+                                                Tài khoản Zalo: 0123 456 789
+                                            </span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item mess">
+                            <a target="_blank" href="https://m.me/sapowebvietnam">
+                                        <span class="img">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" class="bi bi-messenger" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M0 7.76C0 3.301 3.493 0 8 0s8 3.301 8 7.76-3.493 7.76-8 7.76c-.81 0-1.586-.107-2.316-.307a.639.639 0 0 0-.427.03l-1.588.702a.64.64 0 0 1-.898-.566l-.044-1.423a.639.639 0 0 0-.215-.456C.956 12.108 0 10.092 0 7.76zm5.546-1.459-2.35 3.728c-.225.358.214.761.551.506l2.525-1.916a.48.48 0 0 1 .578-.002l1.869 1.402a1.2 1.2 0 0 0 1.735-.32l2.35-3.728c.226-.358-.214-.761-.551-.506L9.728 7.381a.48.48 0 0 1-.578.002L7.281 5.98a1.2 1.2 0 0 0-1.735.32z" />
+                                            </svg>
+                                        </span>
+                                <div class="detail">
+                                    <b class="arcu-item-title">
+                                        Messenger:
+                                    </b>
+                                    <span class="arcu-item-subtitle">
+                                                m.me/sapowebvietnam
+                                            </span>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="item map">
+                            <a target="_blank" href="/he-thong-cua-hang">
+                                        <span class="img">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor" class="bi bi-pin-map" viewBox="0 0 16 16">
+                                                <path fill-rule="evenodd"
+                                                      d="M3.1 11.2a.5.5 0 0 1 .4-.2H6a.5.5 0 0 1 0 1H3.75L1.5 15h13l-2.25-3H10a.5.5 0 0 1 0-1h2.5a.5.5 0 0 1 .4.2l3 4a.5.5 0 0 1-.4.8H.5a.5.5 0 0 1-.4-.8l3-4z" />
+                                                <path fill-rule="evenodd"
+                                                      d="M8 1a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999z" />
+                                            </svg>
+                                        </span>
+                                <div class="detail">
+                                    <b class="arcu-item-title">
+                                        Hệ thống cửa hàng:
+                                    </b>
+                                    <span class="arcu-item-subtitle">
+                                                Xem địa chỉ cửa hàng
+                                            </span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="out-circle">
+                        <div class="main-icon">
+                            <svg width="20" height="20" viewBox="0 0 20 20" version="1.1"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <g transform="translate(-825 -308)">
+                                    <g>
+                                        <path transform="translate(825 308)" fill="#FFFFFF"
+                                              d="M 19 4L 17 4L 17 13L 4 13L 4 15C 4 15.55 4.45 16 5 16L 16 16L 20 20L 20 5C 20 4.45 19.55 4 19 4ZM 15 10L 15 1C 15 0.45 14.55 0 14 0L 1 0C 0.45 0 0 0.45 0 1L 0 15L 4 11L 14 11C 14.55 11 15 10.55 15 10Z">
+                                        </path>
+                                    </g>
+                                </g>
+                            </svg>
+                            <p>
+                                Hỗ trợ
+                            </p>
+                        </div>
+                        <div class="close-icon unsee element">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
+                                 fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                <path
+                                    d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <script>
+                    $(function() {
+                        $('.close-icon').click(function(event) {
+                            $('.element').toggleClass('unsee');
+                        });
+                    });
+                </script>
             </div>
         </div>
     </div>
 </footer>
-<a href="#" class="backtop" title="Lên đầu trang">
-    <svg aria-hidden="true" focusable="false" data-prefix="far" data-icon="angle-up" role="img"
-        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="svg-inline--fa fa-angle-up fa-w-10">
-        <path fill="currentColor"
-            d="M168.5 164.2l148 146.8c4.7 4.7 4.7 12.3 0 17l-19.8 19.8c-4.7 4.7-12.3 4.7-17 0L160 229.3 40.3 347.8c-4.7 4.7-12.3 4.7-17 0L3.5 328c-4.7-4.7-4.7-12.3 0-17l148-146.8c4.7-4.7 12.3-4.7 17 0z"
-            class=""></path>
-    </svg>
-</a>

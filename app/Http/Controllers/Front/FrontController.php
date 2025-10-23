@@ -169,12 +169,11 @@ class FrontController extends Controller
 
     public function showProductDetail($slug)
     {
-        // try {
         $categories = Category::getAllCategory();
         $product = Product::with([
             'product_rates' => function ($q) {
                 $q->where('status', 2);
-            }
+            }, 'image', 'galleries.image'
         ])->where('slug', $slug)->first();
         $attributes = [];
         foreach ($product->attributeValues as $attribute) {
@@ -187,13 +186,13 @@ class FrontController extends Controller
                 $attributes[$attribute->id]['values'][] = $attribute->pivot->value;
             }
         }
-        $product->attributes = $attributes;
+        $product->attributes = array_values($attributes);
 
         // sản phẩm tương tự
         $productsRelated = $product->category->products()->with([
             'product_rates' => function ($q) {
                 $q->where('status', 2);
-            }
+            }, 'image'
         ])->whereNotIn('id', [$product->id])->orderBy('created_at', 'desc')->get();
 
         $bestSellerProducts = Product::query()->with([
