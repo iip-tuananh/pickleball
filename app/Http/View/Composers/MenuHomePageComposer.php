@@ -9,6 +9,7 @@ use App\Model\Admin\PostCategory;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 use App\Model\Admin\OrderRevenueDetail;
+use App\Model\Admin\Policy;
 
 class MenuHomePageComposer
 {
@@ -27,13 +28,13 @@ class MenuHomePageComposer
         ->orderBy('sort_order')
         ->get();
 
-        $categorySpecialFlashsale = CategorySpecial::query()
-        ->has('products')
-        ->where('type', 10)
-        ->where('show_home_page', 1)
-        ->where('order_number', 1)
-        ->orderBy('order_number')
-        ->first();
+        // $categorySpecialFlashsale = CategorySpecial::query()
+        // ->has('products')
+        // ->where('type', 10)
+        // ->where('show_home_page', 1)
+        // ->where('order_number', 1)
+        // ->orderBy('order_number')
+        // ->first();
 
         // $user = Auth::guard('client')->user();
         // if ($user) {
@@ -55,8 +56,10 @@ class MenuHomePageComposer
         //     $waiting_quyet_toan_amount = 0;
         // }
 
+        $policies = Policy::query()->where('status', true)->latest()->get();
+
         $postCategories = PostCategory::query()->where(['parent_id' => 0])->orderBy('sort_order')->get();
 
-        $view->with(['productCategories' => $productCategories, 'postCategories' => $postCategories, 'categorySpecialFlashsale' => $categorySpecialFlashsale]);
+        $view->with(['productCategories' => $productCategories, 'postCategories' => $postCategories, 'policies' => $policies]);
     }
 }
