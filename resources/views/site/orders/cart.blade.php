@@ -176,7 +176,9 @@
 
                                 <div class="summary-button">
                                     <div class="cart__btn-proceed-checkout-dt">
-                                        <button onclick="goToCheckout(event)" type="button" class="button btn btn-default cart__btn-proceed-checkout" id="btn-proceed-checkout" title="Thanh toán">Thanh toán</button>
+                                        <a href="{{ route('cart.checkout') }}">
+                                            <button type="button" class="button btn btn-default cart__btn-proceed-checkout" id="btn-proceed-checkout" title="Thanh toán">Thanh toán</button>
+                                        </a>
                                     </div>
                                     <a class="return_buy" title="Tiếp tục mua hàng" href="{{ route('front.home-page') }}">Tiếp tục mua hàng</a>
                                 </div>
@@ -184,66 +186,66 @@
 
                         </div>
 
-                        <div class="cart-payment">
-                            <span class="title">Hỗ trợ thanh toán với</span>
-                            <div class="payment-footer">
+{{--                        <div class="cart-payment">--}}
+{{--                            <span class="title">Hỗ trợ thanh toán với</span>--}}
+{{--                            <div class="payment-footer">--}}
 
 
 
 
 
-                                <div class="payment-item">
-                                    <img class="lazyload" width=126 height=58 alt="MoMo" data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/payment_1.png?1758009149569" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"/>
-                                </div>
-
-
-
-
-
-
-                                <div class="payment-item">
-                                    <img class="lazyload" width=126 height=58 alt="Zalo Pay" data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/payment_2.png?1758009149569" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"/>
-                                </div>
+{{--                                <div class="payment-item">--}}
+{{--                                    <img class="lazyload" width=126 height=58 alt="MoMo" data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/payment_1.png?1758009149569" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"/>--}}
+{{--                                </div>--}}
 
 
 
 
 
 
-                                <div class="payment-item">
-                                    <img class="lazyload" width=126 height=58 alt="VnPay" data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/payment_3.png?1758009149569" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"/>
-                                </div>
+{{--                                <div class="payment-item">--}}
+{{--                                    <img class="lazyload" width=126 height=58 alt="Zalo Pay" data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/payment_2.png?1758009149569" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"/>--}}
+{{--                                </div>--}}
 
 
 
 
 
 
-                                <div class="payment-item">
-                                    <img class="lazyload" width=126 height=58 alt="Moca" data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/payment_4.png?1758009149569" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"/>
-                                </div>
+{{--                                <div class="payment-item">--}}
+{{--                                    <img class="lazyload" width=126 height=58 alt="VnPay" data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/payment_3.png?1758009149569" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"/>--}}
+{{--                                </div>--}}
 
 
 
 
 
 
-                                <div class="payment-item">
-                                    <img class="lazyload" width=126 height=58 alt="Visa" data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/payment_5.png?1758009149569" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"/>
-                                </div>
+{{--                                <div class="payment-item">--}}
+{{--                                    <img class="lazyload" width=126 height=58 alt="Moca" data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/payment_4.png?1758009149569" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"/>--}}
+{{--                                </div>--}}
 
 
 
 
 
 
-                                <div class="payment-item">
-                                    <img class="lazyload" width=126 height=58 alt="ATM" data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/payment_6.png?1758009149569" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"/>
-                                </div>
+{{--                                <div class="payment-item">--}}
+{{--                                    <img class="lazyload" width=126 height=58 alt="Visa" data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/payment_5.png?1758009149569" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"/>--}}
+{{--                                </div>--}}
 
 
-                            </div>
-                        </div>
+
+
+
+
+{{--                                <div class="payment-item">--}}
+{{--                                    <img class="lazyload" width=126 height=58 alt="ATM" data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/payment_6.png?1758009149569" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"/>--}}
+{{--                                </div>--}}
+
+
+{{--                            </div>--}}
+{{--                        </div>--}}
 
                     </div>
                 </div>

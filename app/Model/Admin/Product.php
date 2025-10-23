@@ -143,6 +143,10 @@ class Product extends BaseModel
         return $this->belongsTo(Unit::class, 'unit_id');
     }
 
+    public function reviews() {
+        return $this->hasMany(Review::class, 'product_id');
+    }
+
     public function getLinkAttribute()
     {
         if ($this->use_url_custom) {

@@ -281,7 +281,7 @@
                                                             class="btn btn_base normal_button btn_add_cart add_to_cart btn-cart">
                                                         <span class="txt-main">Thêm vào giỏ</span>
                                                     </button>
-                                                    <button class="btn-buyNow btn">
+                                                    <button class="btn-buyNow btn" ng-click="buyNow({{ $product->id }})">
                                                         <span class="txt-main">Mua ngay</span>
                                                     </button>
 
@@ -378,13 +378,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="banner-product-box">
-                            <a class="duration-300" href="/collections/all" title="Banner">
-                                <img alt="Banner" class="lazyload" width="480" height="381"
-                                     data-src="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/product_banner.jpg?1758009149569"
-                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"/>
-                            </a>
-                        </div>
+
 
                     </div>
                 </div>
@@ -404,7 +398,9 @@
                                     <h3>Chính sách đổi trả</h3>
                                 </li>
 
-
+                                <li class="tab-link" data-tab="#tab-3">
+                                    <h3>Review khách hàng</h3>
+                                </li>
                             </ul>
                             <div class="tab-float">
 
@@ -421,27 +417,412 @@
 
 
                                 <div id="tab-2" class="tab-content content_extab">
-                                    <div class="rte">
-
-                                        + Sản phẩm lỗi, hỏng do quá trình sản xuất hoặc vận chuyện<br>
-                                        + Nằm trong chính sách đổi trả sản phẩm của Sudes Sport<br>
-                                        + Sản phẩm còn nguyên tem mác chưa qua sử dụng và chưa giặt là<br>
-                                        + Thời gian đổi trả nhỏ hơn 15 ngày kể từ ngày nhận hàng<br>
-                                        + Chi phí bảo hành về sản phẩm, vận chuyển khách hàng chịu chi phí <br>
-                                        <b>Điều kiện đổi trả hàng</b><br>
-                                        Điều kiện về thời gian đổi trả: trong vòng 01 ngày kể từ khi nhận được hàng và
-                                        phải liên hệ gọi ngay cho chúng tôi theo số điện thoại trên để được xác nhận đổi
-                                        trả hàng.<br>
-                                        <b>Điều kiện đổi trả hàng:</b><br>
-                                        - Sản phẩm gửi lại phải còn nguyên đai nguyên kiện<br>
-                                        - Phiếu bảo hành (nếu có) và tem của công ty trên sản phẩm còn nguyên vẹn.<br>
-                                        - Sản phẩm đổi/ trả phải còn đầy đủ hộp, giấy Hướng dẫn sử dụng và chưa qua sử
-                                        dụng.<br>
-                                        - Quý khách chịu chi phí vận chuyển, đóng gói, thu hộ tiền, chi phí liên lạc tối
-                                        đa tương đương 20% giá trị đơn hàng.
-
-                                    </div>
+{{--                                   chính sách đổi trả--}}
                                 </div>
+
+                                <!-- ===== START: REVIEWS BLOCK ===== -->
+                                <div id="tab-3" class="tab-content content_extab">
+                                    <section class="reviews" aria-label="Đánh giá sản phẩm">
+                                        <!-- Summary / Controls -->
+                                        <div class="reviews__top">
+                                            <div class="reviews__summary" aria-live="polite">
+                                                <div class="summary__score">
+                                                    <div class="score__value" id="avgScore">0.0</div>
+                                                    <div class="score__stars" aria-hidden="true">
+                                                        <div class="stars stars--lg">
+                                                            <div class="stars__bg"></div>
+                                                            <div class="stars__fg" id="avgStars"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="summary__meta">
+                                                    <div><strong id="totalReviews">0</strong> đánh giá</div>
+                                                    <div class="summary__hint">Xếp hạng trung bình</div>
+                                                </div>
+                                            </div>
+
+                                            <div class="reviews__controls">
+                                                <label class="control">
+                                                    <span>Lọc theo sao:</span>
+                                                    <select id="filterRating">
+                                                        <option value="all">Tất cả</option>
+                                                        <option value="5">5 sao</option>
+                                                        <option value="4">4 sao</option>
+                                                        <option value="3">3 sao</option>
+                                                        <option value="2">2 sao</option>
+                                                        <option value="1">1 sao</option>
+                                                    </select>
+                                                </label>
+
+                                                <label class="control">
+                                                    <span>Sắp xếp:</span>
+                                                    <select id="sortBy">
+                                                        <option value="newest">Mới nhất</option>
+                                                        <option value="oldest">Cũ nhất</option>
+                                                        <option value="highest">Sao cao → thấp</option>
+                                                        <option value="lowest">Sao thấp → cao</option>
+                                                    </select>
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <!-- List -->
+                                        <div class="reviews__list" id="reviewsList" aria-live="polite"></div>
+
+                                    </section>
+                                </div>
+
+                                <style>
+                                    /* ===== REVIEWS BLOCK STYLES (scoped by #tab-3) ===== */
+                                    #tab-3 { --brand: #1363df; --ink: #0b1221; --muted:#6b7280; --line:#e5e7eb; --bg:#ffffff; --card:#ffffff; --ring:#eef2ff; }
+                                    #tab-3 .reviews { padding: 16px; background: var(--bg); border-radius: 14px; border:1px solid var(--line); }
+                                    @media (min-width: 768px){ #tab-3 .reviews{ padding: 24px; } }
+
+                                    #tab-3 .reviews__top{
+                                        display:grid; gap:16px; align-items:center; margin-bottom:16px;
+                                    }
+                                    @media (min-width: 768px){
+                                        #tab-3 .reviews__top{ grid-template-columns: 1fr auto; }
+                                    }
+
+                                    #tab-3 .reviews__summary{
+                                        display:flex; align-items:center; gap:16px; background: var(--card);
+                                        border:1px solid var(--line); border-radius: 14px; padding:12px 14px;
+                                    }
+                                    #tab-3 .summary__score{ display:flex; align-items:center; gap:12px; }
+                                    #tab-3 .score__value{
+                                        font-size: clamp(24px, 4vw, 36px); font-weight:800; color: var(--ink); line-height:1;
+                                    }
+                                    #tab-3 .summary__meta{ color: var(--muted); font-size:14px; }
+                                    #tab-3 .summary__meta strong{ color: var(--ink); }
+
+                                    #tab-3 .reviews__controls{
+                                        display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-start;
+                                    }
+                                    #tab-3 .control{ display:flex; align-items:center; gap:8px; font-size:14px; color:var(--muted); }
+                                    #tab-3 .control select{
+                                        appearance:none; -webkit-appearance:none; -moz-appearance:none;
+                                        border:1px solid var(--line); background:#fff; border-radius:10px; padding:8px 12px; color:var(--ink);
+                                        outline:none;
+                                    }
+                                    #tab-3 .control select:focus{ box-shadow: 0 0 0 4px var(--ring); border-color:#c7d2fe; }
+
+                                    /* Stars (mask technique with two layers) */
+                                    #tab-3 .stars{ --size:18px; position:relative; width: calc(var(--size) * 5); height: var(--size); display:inline-block; }
+                                    #tab-3 .stars--lg{ --size:22px; }
+                                    #tab-3 .stars__bg, #tab-3 .stars__fg{
+                                        position:absolute; inset:0;
+                                        -webkit-mask: url('data:image/svg+xml;utf8,\
+<svg xmlns="http://www.w3.org/2000/svg" viewBox=\'0 0 110 20\'><g>\
+<path d=\"M10 0l2.94 6.06L20 7.27l-5 4.88L16.18 20 10 16.9 3.82 20 5 12.15 0 7.27l7.06-1.21z\"/>\
+<path d=\"M32 0l2.94 6.06L42 7.27l-5 4.88L38.18 20 32 16.9 25.82 20 27 12.15 22 7.27l7.06-1.21z\"/>\
+<path d=\"M54 0l2.94 6.06L64 7.27l-5 4.88L60.18 20 54 16.9 47.82 20 49 12.15 44 7.27l7.06-1.21z\"/>\
+<path d=\"M76 0l2.94 6.06L86 7.27l-5 4.88L82.18 20 76 16.9 69.82 20 71 12.15 66 7.27l7.06-1.21z\"/>\
+<path d=\"M98 0l2.94 6.06L108 7.27l-5 4.88L104.18 20 98 16.9 91.82 20 93 12.15 88 7.27l7.06-1.21z\"/>\
+</g></svg>') center/contain no-repeat;
+                                        mask: url('data:image/svg+xml;utf8,\
+<svg xmlns="http://www.w3.org/2000/svg" viewBox=\'0 0 110 20\'><g>\
+<path d=\"M10 0l2.94 6.06L20 7.27l-5 4.88L16.18 20 10 16.9 3.82 20 5 12.15 0 7.27l7.06-1.21z\"/>\
+<path d=\"M32 0l2.94 6.06L42 7.27l-5 4.88L38.18 20 32 16.9 25.82 20 27 12.15 22 7.27l7.06-1.21z\"/>\
+<path d=\"M54 0l2.94 6.06L64 7.27l-5 4.88L60.18 20 54 16.9 47.82 20 49 12.15 44 7.27l7.06-1.21z\"/>\
+<path d=\"M76 0l2.94 6.06L86 7.27l-5 4.88L82.18 20 76 16.9 69.82 20 71 12.15 66 7.27l7.06-1.21z\"/>\
+<path d=\"M98 0l2.94 6.06L108 7.27l-5 4.88L104.18 20 98 16.9 91.82 20 93 12.15 88 7.27l7.06-1.21z\"/>\
+</g></svg>') center/contain no-repeat;
+                                    }
+                                    /*#tab-3 .stars__bg{ background:#e5e7eb; }*/
+                                    #tab-3 .stars__fg{ background: linear-gradient(90deg, #f59e0b, #f59e0b); width: 0%; overflow:hidden; }
+
+                                    /* List grid */
+                                    #tab-3 .reviews__list{ display:grid; gap:14px; }
+                                    @media (min-width: 768px){
+                                        #tab-3 .reviews__list{ grid-template-columns: 1fr 1fr; }
+                                    }
+
+                                    #tab-3 .review{
+                                        display:flex; gap:12px; padding:14px; border:1px solid var(--line); border-radius:14px; background:#fff;
+                                    }
+                                    #tab-3 .review__avatar{
+                                        width:48px; height:48px; border-radius:50%; overflow:hidden; flex:0 0 48px; border:1px solid var(--line);
+                                    }
+                                    #tab-3 .review__avatar img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+                                    #tab-3 .review__body{ flex:1 1 auto; min-width:0; }
+                                    #tab-3 .review__head{ display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:6px; }
+                                    #tab-3 .review__author{ font-weight:700; color:var(--ink); }
+                                    #tab-3 .review__meta{ font-size:12px; color:var(--muted); margin-bottom:8px; }
+
+                                    #tab-3 .review__stars .stars{ vertical-align:middle; }
+                                    #tab-3 .review__content{ color:#1f2937; font-size:14px; line-height:1.6; }
+                                    #tab-3 .review__content[data-clamped="true"]{ display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden; }
+                                    #tab-3 .review__actions{ margin-top:8px; }
+                                    #tab-3 .btn-link{
+                                        background:transparent; border:none; padding:0; color:var(--brand); font-weight:600; cursor:pointer;
+                                    }
+                                    #tab-3 .btn-link:focus{ outline: none; box-shadow: 0 0 0 4px var(--ring); border-radius:6px; }
+
+                                    /* Subtle card hover */
+                                    #tab-3 .review{ transition: box-shadow .2s ease, transform .06s ease; }
+                                    #tab-3 .review:hover{ box-shadow: 0 6px 18px rgba(17, 24, 39, .08); transform: translateY(-1px); }
+                                </style>
+                                <style>
+                                    /* Stars: discrete per-review */
+                                    #tab-3 .stars-inline{
+                                        display:inline-flex; align-items:center; gap:2px;
+                                    }
+                                    #tab-3 .stars-inline svg{
+                                        width:18px; height:18px; display:block;
+                                    }
+                                    #tab-3 .stars-inline .filled path{ fill:#f59e0b; }  /* sao tô */
+                                    #tab-3 .stars-inline .empty  path{ fill:#e5e7eb; }  /* sao rỗng (nếu bạn muốn đủ 5) */
+                                </style>
+
+                                @php
+                                    use Illuminate\Support\Str;
+                                    use Carbon\Carbon;
+
+                                    $reviewsJs = $reviews->map(function ($r) {
+                                        // Avatar: ưu tiên avatar_url; nếu không, dùng Gravatar theo email; không có nữa thì null
+                                        $gravatar = $r->user_email
+                                            ? 'https://www.gravatar.com/avatar/' . md5(strtolower(trim($r->user_email))) . '?s=96&d=identicon'
+                                            : null;
+                                        $avatar = $r->avatar_url ?: $gravatar;
+
+
+                                        // Ngày tạo: ưu tiên created_at; fallback approve_date; nếu cả hai null thì null
+                                        $createdIso = null;
+                                        if (!empty($r->created_at)) {
+                                            $createdIso = $r->created_at instanceof \Carbon\Carbon
+                                                ? $r->created_at->toIso8601String()
+                                                : Carbon::parse($r->created_at)->toIso8601String();
+                                        } elseif (!empty($r->approve_date)) {
+                                            $createdIso = Carbon::parse($r->approve_date)->toIso8601String();
+                                        }
+
+                                        return [
+                                            'name'       => $r->user_name ?: 'Khách hàng ẩn danh',
+                                            'role'       => $r->user_email,
+                                            'rating'     => max(1, min(5, (int) $r->rating)), // ép về 1..5
+                                            'content'    => (string) ($r->content ?? ''),
+                                            'avatar'     => $avatar,
+                                            'created_at' => $createdIso,
+                                        ];
+                                    })->values();
+                                @endphp
+
+                                <script>
+                                    // Đổ JSON ra JS (giữ Unicode + dấu / cho gọn)
+                                    window.REVIEWS = @json($reviewsJs, JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+                                </script>
+
+                                <script>
+                                    /* ===== Simple demo data & rendering ===== */
+                                    (() => {
+                                        const data = Array.isArray(window.REVIEWS) ? window.REVIEWS : [];
+                                        console.log(data)
+                                        const reviewsList = document.getElementById("reviewsList");
+                                        const avgScoreEl = document.getElementById("avgScore");
+                                        const avgStarsEl = document.getElementById("avgStars");
+                                        const totalReviewsEl = document.getElementById("totalReviews");
+                                        const filterRating = document.getElementById("filterRating");
+                                        const sortBy = document.getElementById("sortBy");
+
+                                        function calcAvg(list){
+                                            if(!list.length) return 0;
+                                            const sum = list.reduce((s, r)=> s + (+r.rating||0), 0);
+                                            return Math.round((sum / list.length) * 10) / 10;
+                                        }
+
+                                        function setStarsFill(container, score){
+                                            // score in [0..5] -> width %
+                                            const pct = Math.max(0, Math.min(5, score)) / 5 * 100;
+                                            container.style.width = pct + "%";
+                                        }
+
+                                        function formatDate(iso){
+                                            const d = new Date(iso);
+                                            return d.toLocaleDateString("vi-VN", { day:"2-digit", month:"2-digit", year:"numeric" });
+                                        }
+
+
+
+    //                                     function renderCard(item){
+    //                                         const wrap = document.createElement("article");
+    //                                         wrap.className = "review";
+    //                                         wrap.setAttribute("aria-label", `Đánh giá ${item.rating} sao bởi ${item.name}`);
+    //
+    //                                         const avatar = document.createElement("div");
+    //                                         avatar.className = "review__avatar";
+    //                                         avatar.innerHTML = `<img src="${item.avatar || ''}" alt="Ảnh đại diện của ${item.name}" onerror="this.style.display='none'">`;
+    //
+    //                                         const body = document.createElement("div");
+    //                                         body.className = "review__body";
+    //
+    //                                         const head = document.createElement("div");
+    //                                         head.className = "review__head";
+    //
+    //                                         const author = document.createElement("div");
+    //                                         author.className = "review__author";
+    //                                         author.textContent = item.name;
+    //
+    //                                         const starWrap = document.createElement("div");
+    //                                         starWrap.className = "review__stars";
+    //                                         starWrap.setAttribute("aria-label", `${item.rating} trên 5 sao`);
+    //                                         starWrap.innerHTML = `
+    //   <div class="stars">
+    //     <div class="stars__bg"></div>
+    //     <div class="stars__fg"></div>
+    //   </div>
+    // `;
+    //
+    //                                         head.appendChild(author);
+    //                                         head.appendChild(starWrap);
+    //
+    //                                         const meta = document.createElement("div");
+    //                                         meta.className = "review__meta";
+    //                                         meta.textContent = `${item.role} • ${formatDate(item.created_at)}`;
+    //
+    //                                         const content = document.createElement("div");
+    //                                         content.className = "review__content";
+    //                                         content.dataset.clamped = "true";
+    //                                         content.textContent = item.content;
+    //
+    //                                         const actions = document.createElement("div");
+    //                                         actions.className = "review__actions";
+    //                                         const btn = document.createElement("button");
+    //                                         btn.type = "button";
+    //                                         btn.className = "btn-link";
+    //                                         btn.textContent = "Xem thêm";
+    //                                         btn.addEventListener("click", () => {
+    //                                             const isClamped = content.dataset.clamped === "true";
+    //                                             content.dataset.clamped = isClamped ? "false" : "true";
+    //                                             btn.textContent = isClamped ? "Thu gọn" : "Xem thêm";
+    //                                         });
+    //                                         actions.appendChild(btn);
+    //
+    //                                         body.appendChild(head);
+    //                                         body.appendChild(meta);
+    //                                         body.appendChild(content);
+    //                                         body.appendChild(actions);
+    //
+    //                                         wrap.appendChild(avatar);
+    //                                         wrap.appendChild(body);
+    //
+    //                                         // set stars
+    //                                         setStarsFill(starWrap.querySelector(".stars__fg"), item.rating);
+    //
+    //                                         return wrap;
+    //                                     }
+
+
+
+                                        function createDiscreteStarsHTML(rating){
+                                            const count = Math.max(0, Math.min(5, parseInt(rating,10) || 0));
+                                            // Hiển thị đúng số sao = rating (3 -> 3 sao). Nếu muốn luôn 5 sao (3 tô, 2 rỗng) thì xem ghi chú bên dưới.
+                                            let html = '<span class="stars-inline" aria-hidden="true">';
+                                            const starSvg = (cls) => `
+      <svg class="${cls}" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M10 1.5l2.47 5 5.53.8-4 3.9.94 5.5L10 14.9 5.06 16.7l.94-5.5-4-3.9 5.53-.8L10 1.5z"/>
+      </svg>`;
+                                            for(let i=0;i<count;i++) html += starSvg('filled');
+                                            html += '</span>';
+                                            return html;
+                                        }
+
+                                        function renderCard(item){
+                                            const wrap = document.createElement("article");
+                                            wrap.className = "review";
+                                            wrap.setAttribute("aria-label", `Đánh giá ${item.rating} sao bởi ${item.name}`);
+
+                                            const avatar = document.createElement("div");
+                                            avatar.className = "review__avatar";
+                                            avatar.innerHTML = `<img src="${item.avatar || ''}" alt="Ảnh đại diện của ${item.name}" onerror="this.style.display='none'">`;
+
+                                            const body = document.createElement("div");
+                                            body.className = "review__body";
+
+                                            const head = document.createElement("div");
+                                            head.className = "review__head";
+
+                                            const author = document.createElement("div");
+                                            author.className = "review__author";
+                                            author.textContent = item.name;
+
+                                            const starWrap = document.createElement("div");
+                                            starWrap.className = "review__stars";
+                                            starWrap.setAttribute("aria-label", `${item.rating} trên 5 sao`);
+                                            // === DÙNG SAO RỜI ===
+                                            starWrap.innerHTML = createDiscreteStarsHTML(item.rating);
+
+                                            head.appendChild(author);
+                                            head.appendChild(starWrap);
+
+                                            const meta = document.createElement("div");
+                                            meta.className = "review__meta";
+                                            meta.textContent = `${item.role || ''} ${item.role ? ' • ' : ''}${formatDate(item.created_at)}`;
+
+                                            const content = document.createElement("div");
+                                            content.className = "review__content";
+                                            content.dataset.clamped = "true";
+                                            content.textContent = item.content;
+
+                                            const actions = document.createElement("div");
+                                            actions.className = "review__actions";
+                                            const btn = document.createElement("button");
+                                            btn.type = "button";
+                                            btn.className = "btn-link";
+                                            btn.textContent = "Xem thêm";
+                                            btn.addEventListener("click", () => {
+                                                const isClamped = content.dataset.clamped === "true";
+                                                content.dataset.clamped = isClamped ? "false" : "true";
+                                                btn.textContent = isClamped ? "Thu gọn" : "Xem thêm";
+                                            });
+                                            actions.appendChild(btn);
+
+                                            body.appendChild(head);
+                                            body.appendChild(meta);
+                                            body.appendChild(content);
+                                            body.appendChild(actions);
+
+                                            wrap.appendChild(avatar);
+                                            wrap.appendChild(body);
+
+                                            return wrap;
+                                        }
+
+
+                                        function applyControls(list){
+                                            let out = [...list];
+                                            const f = filterRating.value;
+                                            if(f !== "all"){ out = out.filter(r => +r.rating === +f); }
+
+                                            const s = sortBy.value;
+                                            if(s === "newest") out.sort((a,b)=> new Date(b.created_at) - new Date(a.created_at));
+                                            if(s === "oldest") out.sort((a,b)=> new Date(a.created_at) - new Date(b.created_at));
+                                            if(s === "highest") out.sort((a,b)=> b.rating - a.rating);
+                                            if(s === "lowest") out.sort((a,b)=> a.rating - b.rating);
+
+                                            return out;
+                                        }
+
+                                        function render(){
+                                            const list = applyControls(data);
+                                            reviewsList.innerHTML = "";
+                                            list.forEach(item => reviewsList.appendChild(renderCard(item)));
+
+                                            const avg = calcAvg(data);
+                                            avgScoreEl.textContent = avg.toFixed(1);
+                                            totalReviewsEl.textContent = data.length;
+                                            setStarsFill(avgStarsEl, avg);
+                                        }
+
+                                        filterRating.addEventListener("change", render);
+                                        sortBy.addEventListener("change", render);
+
+                                        // initial render
+                                        render();
+                                    })();
+                                </script>
+                                <!-- ===== END: REVIEWS BLOCK ===== -->
 
 
                             </div>
@@ -460,152 +841,34 @@
                             </a>
                             <div class="product-favi-content">
 
-
-                                <div class="product-view">
-                                    <a class="image_thumb" href="/sandals-leo-nui-da-ngoai-nam-nh100"
-                                       title="Sandals leo n&#250;i d&#227; ngoại nam NH100">
-                                        <img width="370" height="480" class="lazyload"
-                                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"
-                                             data-src="//bizweb.dktcdn.net/thumb/large/100/490/431/products/p751995.jpg?v=1695555820190"
-                                             alt="Sandals leo núi dã ngoại nam NH100">
-                                    </a>
-                                    <div class="product-info">
-                                        <h3 class="product-name"><a href="/sandals-leo-nui-da-ngoai-nam-nh100"
-                                                                    title="Sandals leo n&#250;i d&#227; ngoại nam NH100">Sandals
-                                                leo n&#250;i d&#227; ngoại nam NH100</a></h3>
-                                        <div class="price-box">
-
-
-                                            <span class="price">545.000₫</span>
-
-                                            <span class="compare-price">800.000₫</span>
+                                @foreach($bestSellerProducts as $bestSellerProduct)
+                                    <div class="product-view">
+                                        <a class="image_thumb" href="{{ route('front.show-product-detail', $bestSellerProduct->slug) }}"
+                                           title="Sandals leo n&#250;i d&#227; ngoại nam NH100">
+                                            <img width="370" height="480" class="lazyload"
+                                                 src="{{ $bestSellerProduct->image->path ?? '' }}"
+                                                 data-src="{{ $bestSellerProduct->image->path ?? '' }}"
+                                                 alt=" {{ $bestSellerProduct->name }}">
+                                        </a>
+                                        <div class="product-info">
+                                            <h3 class="product-name"><a href="{{ route('front.show-product-detail', $bestSellerProduct->slug) }}"
+                                                                        title=" {{ $bestSellerProduct->name }}">
+                                                    {{ $bestSellerProduct->name }}
+                                                </a></h3>
+                                            <div class="price-box">
 
 
+                                                <span class="price">{{ formatCurrency($bestSellerProduct->price) }}₫</span>
+                                                @if($bestSellerProduct->base_price > 0)
+                                                    <span class="compare-price">{{ formatCurrency($bestSellerProduct->base_price) }}₫</span>
+                                                @endif
+
+
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-
-                                <div class="product-view">
-                                    <a class="image_thumb" href="/giay-chay-bo-run-active-grip-cho-nam"
-                                       title="Gi&#224;y chạy bộ Run Active Grip cho nam">
-                                        <img width="370" height="480" class="lazyload"
-                                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"
-                                             data-src="//bizweb.dktcdn.net/thumb/large/100/490/431/products/p2175064.jpg?v=1695555009510"
-                                             alt="Giày chạy bộ Run Active Grip cho nam">
-                                    </a>
-                                    <div class="product-info">
-                                        <h3 class="product-name"><a href="/giay-chay-bo-run-active-grip-cho-nam"
-                                                                    title="Gi&#224;y chạy bộ Run Active Grip cho nam">Gi&#224;y
-                                                chạy bộ Run Active Grip cho nam</a></h3>
-                                        <div class="price-box">
-
-
-                                            <span class="price">895.000₫</span>
-
-                                            <span class="compare-price">1.000.000₫</span>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="product-view">
-                                    <a class="image_thumb" href="/tui-dung-giay-light-15-lit"
-                                       title="T&#250;i đựng gi&#224;y Light 15 L&#237;t">
-                                        <img width="370" height="480" class="lazyload"
-                                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"
-                                             data-src="//bizweb.dktcdn.net/thumb/large/100/490/431/products/p1595354.jpg?v=1694062347347"
-                                             alt="Túi đựng giày Light 15 Lít">
-                                    </a>
-                                    <div class="product-info">
-                                        <h3 class="product-name"><a href="/tui-dung-giay-light-15-lit"
-                                                                    title="T&#250;i đựng gi&#224;y Light 15 L&#237;t">T&#250;i
-                                                đựng gi&#224;y Light 15 L&#237;t</a></h3>
-                                        <div class="price-box">
-
-
-                                            <span class="price">69.000₫</span>
-
-                                            <span class="compare-price">89.000₫</span>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="product-view">
-                                    <a class="image_thumb" href="/balo-da-ngoai-nh100-10l"
-                                       title="Bal&#244; d&#227; ngoại NH100 10L">
-                                        <img width="370" height="480" class="lazyload"
-                                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"
-                                             data-src="//bizweb.dktcdn.net/thumb/large/100/490/431/products/p1640075.jpg?v=1694061857890"
-                                             alt="Balô dã ngoại NH100 10L">
-                                    </a>
-                                    <div class="product-info">
-                                        <h3 class="product-name"><a href="/balo-da-ngoai-nh100-10l"
-                                                                    title="Bal&#244; d&#227; ngoại NH100 10L">Bal&#244;
-                                                d&#227; ngoại NH100 10L</a></h3>
-                                        <div class="price-box">
-
-
-                                            <span class="price">79.000₫</span>
-
-                                            <span class="compare-price">99.000₫</span>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="product-view">
-                                    <a class="image_thumb" href="/binh-dung-nuoc-gallon-den"
-                                       title="B&#236;nh đựng nước Gallon - Đen">
-                                        <img width="370" height="480" class="lazyload"
-                                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"
-                                             data-src="//bizweb.dktcdn.net/thumb/large/100/490/431/products/p1573979.jpg?v=1694061460337"
-                                             alt="Bình đựng nước Gallon - Đen">
-                                    </a>
-                                    <div class="product-info">
-                                        <h3 class="product-name"><a href="/binh-dung-nuoc-gallon-den"
-                                                                    title="B&#236;nh đựng nước Gallon - Đen">B&#236;nh
-                                                đựng nước Gallon - Đen</a></h3>
-                                        <div class="price-box">
-
-
-                                            275.000₫
-
-
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="product-view">
-                                    <a class="image_thumb" href="/vest-chay-dia-hinh-5l"
-                                       title="Vest chạy địa h&#236;nh 5L">
-                                        <img width="370" height="480" class="lazyload"
-                                             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"
-                                             data-src="//bizweb.dktcdn.net/thumb/large/100/490/431/products/p2185161.jpg?v=1694061299987"
-                                             alt="Vest chạy địa hình 5L">
-                                    </a>
-                                    <div class="product-info">
-                                        <h3 class="product-name"><a href="/vest-chay-dia-hinh-5l"
-                                                                    title="Vest chạy địa h&#236;nh 5L">Vest chạy địa h&#236;nh
-                                                5L</a></h3>
-                                        <div class="price-box">
-
-
-                                            895.000₫
-
-
-                                        </div>
-                                    </div>
-                                </div>
-
+                                @endforeach
 
                             </div>
 
@@ -1508,14 +1771,27 @@
     <link href="//bizweb.dktcdn.net/100/490/431/themes/927074/assets/bpr-products-module.css?1758009149569"
           rel="stylesheet" type="text/css" media="all"/>
     <div class="sapo-product-reviews-module"></div>
+
+
+
+
+
+
+
+
 @endsection
 
 @push('script')
 
     <script>
         app.controller('productDetailPage', function ($rootScope, $scope, $interval, $timeout, cartItemSync) {
-            $scope.addToCart = function (productId) {
-                var currentVal = parseInt(jQuery('input[name="quantity"]').val());
+            $scope.addToCart = function (productId, qty = null) {
+                if(qty) {
+                    var currentVal = qty;
+                } else {
+                    var currentVal = parseInt(jQuery('input[name="quantity"]').val());
+                }
+
                 url = "{{route('cart.add.item', ['productId' => 'productId'])}}";
                 url = url.replace('productId', productId);
 
@@ -1591,11 +1867,46 @@
 
             $scope.buyNow = function (productId) {
                 var currentVal = parseInt(jQuery('input[name="quantity"]').val());
-                url = "{{route('cart.add.item', ['productId' => 'productId', 'variantId' => 'variantId'])}}";
+                url = "{{route('cart.add.item', ['productId' => 'productId'])}}";
                 url = url.replace('productId', productId);
-                url = url.replace('variantId', $scope.selectedVariantId);
-                console.log(productId)
-                console.log($scope.selectedVariantId)
+
+                // mảng value attributes khi click chọn
+                var selectedValueIds = [];
+                var selectedValueLabels = [];
+                var missing = [];
+
+                jQuery('.swatch').each(function () {
+                    var $sw = jQuery(this);
+                    var $checked = $sw.find('input[type=radio]:checked');
+
+                    if ($checked.length) {
+                        // id (vid)
+                        var vid = parseInt($checked.val(), 10);
+                        selectedValueIds.push(vid);
+
+                        // label (vlabel)
+                        // ưu tiên lấy từ .swatch-element đang selected
+                        var $el = $checked.closest('.swatch-element');
+                        var vlabel = ($el.data('value') || '').toString().trim();
+
+                        // nếu vì lý do nào đó không có data-value, fallback sang text của <label>
+                        if (!vlabel) {
+                            vlabel = ($el.find('label').text() || '').trim();
+                        }
+
+                        selectedValueLabels.push(vlabel);
+                    } else {
+                        var name = $sw.find('.header').text().trim();
+                        missing.push(name);
+                    }
+                });
+
+                if (missing.length) {
+                    alert('Vui lòng chọn: \n- ' + missing.join('\n- '));
+                    return;
+                }
+
+
                 jQuery.ajax({
                     type: 'POST',
                     url: url,
@@ -1603,7 +1914,9 @@
                         'X-CSRF-TOKEN': CSRF_TOKEN
                     },
                     data: {
-                        'qty': currentVal
+                        qty: currentVal,
+                        attribute_value_ids: selectedValueIds,
+                        attribute_value_labels: selectedValueLabels
                     },
                     success: function (response) {
                         if (response.success) {
@@ -1616,7 +1929,6 @@
 
                             toastr.success('Đã thêm sản phẩm vào giỏ hàng');
                             window.location.href = "{{ route('cart.index') }}";
-
                         }
                     },
                     error: function () {
@@ -1627,6 +1939,7 @@
                     }
                 });
             }
+
 
 
 
@@ -1688,6 +2001,9 @@
             });
         });
     </script>
+
+
+
 
 
 @endpush

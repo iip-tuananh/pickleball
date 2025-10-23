@@ -93,6 +93,18 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/{id}/delete', 'Admin\ContactController@delete')->name('contacts.delete');
         });
 
+        Route::group(['prefix' => 'reviews'], function () {
+            Route::get('/', 'Admin\ReviewController@index')->name('reviews.index');
+            Route::get('/searchData', 'Admin\ReviewController@searchData')->name('reviews.searchData');
+            Route::get('/{id}/getDataForEdit', 'Admin\ReviewController@getDataForEdit')->name('reviews.getDataForEdit');
+            Route::get('/{id}/detail', 'Admin\ReviewController@getReview')->name('reviews.detail');
+            Route::post('/{id}/update', 'Admin\ReviewController@update')->name('reviews.update');
+            Route::get('/{id}/delete', 'Admin\ReviewController@delete')->name('reviews.delete');
+            Route::get('/{id}/show', 'Admin\ReviewController@show')->name('Review.show');
+            Route::get('/create', 'Admin\ReviewController@create')->name('Review.create');
+            Route::post('/', 'Admin\ReviewController@store')->name('Review.store');
+        });
+
         Route::group(['prefix' => 'apply-recruitments'], function () {
             Route::get('/', 'Admin\ApplyRecruitmentsController@index')->name('apply-recruitments.index');
             Route::get('/searchData', 'Admin\ApplyRecruitmentsController@searchData')->name('apply-recruitments.searchData');
@@ -150,19 +162,6 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/{id}/edit', 'Admin\BlockController@edit')->name('Block.edit');
             Route::get('/{id}/delete', 'Admin\BlockController@delete')->name('Block.delete');
             Route::get('/exportExcel','Admin\BlockController@exportExcel')->name('Block.exportExcel');
-        });
-
-        // Customer Review
-        Route::group(['prefix' => 'reviews'], function () {
-            Route::get('/', 'Admin\ReviewController@index')->name('Review.index');
-            Route::get('/searchData', 'Admin\ReviewController@searchData')->name('Review.searchData');
-            Route::get('/{id}/show', 'Admin\ReviewController@show')->name('Review.show');
-            Route::get('/create', 'Admin\ReviewController@create')->name('Review.create');
-            Route::post('/', 'Admin\ReviewController@store')->name('Review.store');
-            Route::post('/{id}/update', 'Admin\ReviewController@update')->name('Review.update');
-            Route::get('/{id}/delete', 'Admin\ReviewController@delete')->name('Review.delete');
-            Route::get('/{id}/getDataForEdit', 'Admin\ReviewController@getDataForEdit');
-            Route::get('/exportExcel','Admin\ReviewController@exportExcel')->name('Review.exportExcel');
         });
 
         // Manufacturers (hãng sản xuất)

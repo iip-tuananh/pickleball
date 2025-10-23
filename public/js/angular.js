@@ -350,25 +350,25 @@ app.directive("ckEditor", function() {
             },
         };
     })
-    .directive("datetime", function () {
+    .directive("datetime", function() {
         return {
             restrict: "A",
             require: "ngModel",
-            link: function (scope, element, attr, ngModel) {
+            link: function(scope, element, attr, ngModel) {
                 $(element).datetimepicker({
-                    format: "H:i d/m/Y",
+                    format: "H:i:s d/m/Y"
                 });
 
-                $(element).on("change", function () {
+                $(element).on("change", function() {
                     let val = $(this).val();
-                    scope.$apply(function () {
+                    scope.$apply(function() {
                         //will cause the ng-model to be updated.
                         setTimeout(() => {
                             ngModel.$setViewValue(val);
                         });
                     });
                 });
-            },
+            }
         };
     })
     .directive("dateForm", function () {

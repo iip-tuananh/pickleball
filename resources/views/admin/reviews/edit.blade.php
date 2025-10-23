@@ -1,8 +1,8 @@
 <div class="modal fade" id="edit-review" tabindex="-1" role="dialog" aria-hidden="true" ng-controller="EditReview">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="semi-bold">Sửa đánh giá</h4>
+                <h4 class="semi-bold">Chi tiết review</h4>
             </div>
             <div class="modal-body">
                 @include('admin.reviews.form')
@@ -23,13 +23,18 @@
 <script>
     app.controller('EditReview', function ($rootScope, $scope, $http) {
         $rootScope.$on("editReview", function (event, data){
-           $scope.form = new Review(data, {scope: $scope});
-           $scope.$applyAsync();
+            $scope.mode = 'edit';
+
+            $scope.form = new Review(data, {scope: $scope});
+            $scope.form.productid = params.get('product-id');
+
+            $scope.$applyAsync();
            $scope.loading.submit = false;
            $('#edit-review').modal('show');
         });
 
         @include('admin.reviews.formJs');
+        $scope.statues = @json(\App\Model\Admin\Review::STATUSES);
 
         // Submit Form sửa
         $scope.submit = function () {
@@ -39,8 +44,6 @@
                 type: "POST",
                 url: url,
                 data: $scope.form.submit_data,
-                processData: false,
-                contentType: false,
                 headers: {
                     'X-CSRF-TOKEN': CSRF_TOKEN
                 },

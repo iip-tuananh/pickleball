@@ -195,13 +195,7 @@
                             <p>Danh mục chính sách</p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('Review.index') }}"
-                            class="nav-link {{ request()->is('admin/reviews') || request()->is('admin/reviews*') ? 'active' : '' }} ">
-                            <i class="far fas  fa-angle-right nav-icon"></i>
-                            <p>Quản lý đánh giá</p>
-                        </a>
-                    </li>
+
                     {{-- <li class="nav-item">
                         <a href="{{ route('tags.index') }}" class="nav-link {{ Request::routeIs('tags.index') ? 'active' : '' }}">
                             <i class="far fas  fa-angle-right nav-icon"></i>

@@ -247,7 +247,7 @@
                                             <span>Tổng tiền:</span>
                                             <strong class="total-price" id="miniCartTotal"><% cart.total | number %>đ</strong>
                                         </div>
-                                        <a class="btn-checkout" href="">Xem giỏ hàng</a>
+                                        <a class="btn-checkout" href="{{ route('cart.index') }}">Xem giỏ hàng</a>
                                     </div>
                                 </div>
                             </div>

@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="semi-bold">Tạo đánh giá</h4>
+                <h4 class="semi-bold">Tạo đánh giá khách hàng</h4>
             </div>
             <div class="modal-body">
                 @include('admin.reviews.form')
@@ -24,6 +24,14 @@
 <script>
     app.controller('CreateReview', function ($scope, $http) {
         $scope.form = new Review({}, {scope: $scope});
+        $scope.form.rating = 0;
+        $scope.mode = 'create';
+        $scope.user = @json($user);
+
+        $scope.form.productid = params.get('product-id');
+
+        $scope.statues = @json(\App\Model\Admin\Review::STATUSES);
+
         @include('admin.reviews.formJs');
 
         // Submit Form tạo mới
@@ -35,8 +43,6 @@
                 type: "POST",
                 url: url,
                 data: $scope.form.submit_data,
-                processData: false,
-                contentType: false,
                 headers: {
                     'X-CSRF-TOKEN': CSRF_TOKEN
                 },

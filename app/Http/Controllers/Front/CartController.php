@@ -41,12 +41,18 @@ class CartController extends Controller
     {
         $product = Product::query()->find($productId);
 
-        $valAttrIds = (array) $request->input('attribute_value_ids', []);   // [173, 176]
-        $valAttrIds = array_map('intval', $valAttrIds);
-        $valAttrIds = array_values(array_unique($valAttrIds));
+        $uniqueId = $product->id;
 
-        $suffix   = implode('-', $valAttrIds);
-        $uniqueId = $product->id . ($suffix ? '-' . $suffix : '');
+        if($request->attribute_value_ids && $request->attribute_value_labels) {
+            $valAttrIds = (array) $request->input('attribute_value_ids', []);
+            $valAttrIds = array_map('intval', $valAttrIds);
+            $valAttrIds = array_values(array_unique($valAttrIds));
+
+            $suffix   = implode('-', $valAttrIds);
+            $uniqueId = $product->id . ($suffix ? '-' . $suffix : '');
+
+            $attrsName = implode(' - ', $request->attribute_value_labels);
+        }
 
         \Cart::add([
             'id' => $uniqueId,
@@ -57,7 +63,7 @@ class CartController extends Controller
                 'image' => $product->image->path ?? '',
                 'slug' => $product->slug,
                 'base_price' => $product->base_price,
-                'attributes' => implode(' - ', $request->attribute_value_labels)
+                'attributes' => @$attrsName ?? ''
             ]
         ]);
 

@@ -94,6 +94,9 @@ class ProductController extends Controller
                 }
 
                 $result = $result . ' <a href="" title="thêm vào danh mục đặc biệt" class="dropdown-item add-category-special"><i class="fa fa-angle-right"></i>Thêm vào danh mục đặc biệt</a>';
+
+                $result = $result . ' <a href="' . route('reviews.index').'?product-id='.$object->id . '" title="Quản lý review" class="dropdown-item" target="_blank"><i class="fa fa-angle-right"></i>Quản lý review</a>';
+
                 $result = $result . '</div></div>';
                 return $result;
 			})

@@ -38,12 +38,14 @@
                 </div>
             </div>
             <div class="button-product">
-                <button class="btn-cart btn-views quick-view-option btn"
-                        title="Thêm vào giỏ hàng" type="button"
-                        data-handle="gia-y-leo-nu-i-da-ngoa-i-co-lu-ng-arpenaz-50-cho-nam">
+                <a href="{{ route('front.show-product-detail', $product->slug) }}">
+                    <button class="btn-cart btn-views btn"
+                            title="Xem chi tiết" type="button"
+                    >
+                        <span>Xem chi tiết</span>
+                    </button>
+                </a>
 
-                    <span>Thêm vào giỏ hàng</span>
-                </button>
             </div>
         </div>
     </form>

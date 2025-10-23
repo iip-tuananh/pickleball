@@ -203,7 +203,7 @@ class FrontController extends Controller
         $bestSellerProducts = Product::query()->with([
             'product_rates' => function ($q) {
                 $q->where('status', 2);
-            }
+            }, 'image'
         ])->where('status', 1)->inRandomOrder()->limit(6)->get();
 
         $category = Category::query()->where('id', $product->cate_id)->first();
@@ -230,8 +230,11 @@ class FrontController extends Controller
             $query->whereIn('id', $voucher_ids)->orWhere('is_all_product', 1);
         })->orderBy('created_at', 'desc')->get();
 
+        $reviews = $product->reviews()
+            ->where('status', Review::STATUS_APPROVED)
+            ->orderBy('created_at', 'desc')->get();
 
-        return view('site.products.product_detail', compact('categories', 'product', 'productsRelated', 'category', 'arr_product_rate_images', 'bestSellerProducts', 'canReview', 'vouchers'));
+        return view('site.products.product_detail', compact('categories', 'product', 'productsRelated', 'category', 'arr_product_rate_images', 'bestSellerProducts', 'canReview', 'vouchers', 'reviews'));
         // } catch (\Exception $exception) {
         //     return view('site.errors');
         //     Log::error($exception);

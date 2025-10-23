@@ -4,15 +4,15 @@
 @endsection
 
 @section('page_title')
-Quản lý đánh giá
+Quản lý review khách hàng
 @endsection
 
 @section('title')
-Quản lý đánh giá
+Quản lý review khách hàng
 @endsection
 
 @section('buttons')
-<a href="javascript:void(0)" class="btn btn-outline-success" data-toggle="modal" data-target="#create-review" class="btn btn-info" ng-click="errors = null"><i class="fa fa-plus"></i> Thêm mới</a>
+    <a href="javascript:void(0)" class="btn btn-outline-success" data-toggle="modal" data-target="#create-review" class="btn btn-info" ng-click="errors = null"><i class="fa fa-plus"></i> Thêm mới</a>
 @endsection
 @section('content')
 <div ng-cloak>
@@ -28,43 +28,61 @@ Quản lý đánh giá
         </div>
 
     </div>
-    {{-- Form tạo mới --}}
-    @include('admin.reviews.create')
     @include('admin.reviews.edit')
+    @include('admin.reviews.create')
+
 </div>
 @endsection
 
 @section('script')
 @include('admin.reviews.Review')
 <script>
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get('product-id');
+
     let datatable = new DATATABLE('table-list', {
 		ajax: {
 			url: '/admin/reviews/searchData',
 			data: function (d, context) {
 				DATATABLE.mergeSearch(d, context);
-			}
+                d.product_id = productId;
+            }
 		},
 		columns: [
 			{data: 'DT_RowIndex', orderable: false, title: "STT", className: "text-center"},
-            {data: 'name', title: 'Tên'},
-            {data: 'position', title: 'Chức vụ'},
-            {data: 'message', title: 'Nội dung'},
-            {data: 'updated_at', title: 'Ngày cập nhật'},
-            {data: 'updated_by', title: 'Người cập nhật'},
+            {data: 'product_id', title: 'Sản phẩm'},
+            {data: 'user_name', title: 'Khách hàng'},
+            {data: 'title', title: 'Tiêu đề'},
+            {data: 'rating', title: 'Đánh giá'},
+            {
+                data: 'status',
+                title: "Trạng thái",
+                render: function (data) {
+                    return getStatus(data, @json(\App\Model\Admin\Review::STATUSES));
+                },
+                className: "text-center"
+            },
+            {data: 'created_at', title: 'Ngày tạo'},
+            {data: 'approve_date', title: 'Ngày duyệt'},
+            {data: 'approve_id', title: 'Người duyệt'},
 			{data: 'action', orderable: false, title: "Hành động"}
 		],
 		search_columns: [
-			{data: 'name', search_type: "text", placeholder: "Khách hàng"},
+			{data: 'user_name', search_type: "text", placeholder: "Khách hàng"},
+            {
+                data: 'status', search_type: "select", placeholder: "Trạng thái",
+                column_data: @json(\App\Model\Admin\Review::STATUSES)
+            }
 		],
 	}).datatable;
 
     createReviewCallback = (response) => {
         datatable.ajax.reload();
     }
+
     app.controller('Reviews', function ($rootScope, $scope, $http) {
         $scope.loading = {};
         $scope.form = {}
-
 
         $('#table-list').on('click', '.edit', function () {
             $scope.data = datatable.row($(this).parents('tr')).data();
