@@ -9,6 +9,39 @@
     <link href="/site/css/collection_style.scss.css?1758009149569"
           rel="stylesheet" type="text/css" media="all"/>
 
+    <style>
+        .sort-cate-right { position: relative; width: 100%; max-width: 260px; }
+        .sort-cate-right h3{
+            display:flex; align-items:center; justify-content:space-between;
+            gap:8px; cursor:pointer; user-select:none; padding:8px 12px;
+            border:1px solid #e6e8ec; border-radius:8px; background:#fff;
+        }
+        .sort-cate-right h3 svg.bi-caret-down-fill{
+            transition: transform .2s ease;
+        }
+
+        .sort-cate-right ul{
+            position:absolute; top:100%; left:0; right:0;
+            background:#fff; border:1px solid #e6e8ec;
+            border-radius:10px; box-shadow:0 8px 30px rgba(0,0,0,.08);
+            overflow:hidden; height:0; opacity:0; visibility:hidden;
+            transform: translateY(-4px);
+            transition: height .22s ease, opacity .18s ease, transform .18s ease, visibility 0s linear .22s;
+            z-index: 30;
+        }
+        .sort-cate-right.open ul{
+            visibility:visible; opacity:1; transform: translateY(0);
+            transition: height .22s ease, opacity .18s ease, transform .18s ease;
+        }
+        .sort-cate-right.open h3 svg.bi-caret-down-fill{ transform: rotate(180deg); }
+
+        .sort-cate-right ul li a{
+            display:block; padding:10px 12px; text-decoration:none; color:#222;
+        }
+        .sort-cate-right ul li a:hover{ background:#f6f7f9; }
+        .sort-cate-right ul li.active > a{ font-weight:700; }
+
+    </style>
 @endsection
 
 @section('content')
@@ -523,6 +556,18 @@
                                 </div>
 
                                 <div class="sort-cate-right">
+                                    @php
+                                        $sort = request('sort', 'date_desc');
+                                        $options = [
+                                            'date_desc'  => ['label' => 'Mặc định',      'title' => 'Mặc định'],
+                                            'name_asc'   => ['label' => 'A &rarr; Z',    'title' => 'Tên A → Z'],
+                                            'name_desc'  => ['label' => 'Z &rarr; A',    'title' => 'Tên Z → A'],
+                                            'price_asc'  => ['label' => 'Giá thấp đến cao',  'title' => 'Giá thấp đến cao'],
+                                            'price_desc' => ['label' => 'Giá cao xuống thấp',  'title' => 'Giá cao xuống thấp'],
+                                        ];
+                                        $currentLabel = $options[$sort]['label'] ?? 'Mặc định';
+                                    @endphp
+
                                     <h3>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                              fill="currentColor" class="bi bi-sort-alpha-down" viewBox="0 0 16 16">
@@ -541,28 +586,25 @@
                                     </h3>
 
                                     <ul>
-                                        <li class="btn-quick-sort default active">
-                                            <a href="javascript:;" title="Mặc định"><i></i>Mặc
+                                        <li class="btn-quick-sort {{ $sort == 'date_desc' ? 'active' : '' }} ">
+                                            <a href="{{ request()->fullUrlWithQuery(['sort'=>'date_desc','page'=>1]) }}" title="Mặc định"><i></i>Mặc
                                                 định</a>
                                         </li>
-                                        <li class="btn-quick-sort alpha-asc">
-                                            <a href="javascript:;" title="Tên A-Z"><i></i>Tên
+                                        <li class="btn-quick-sort alpha-asc  {{ $sort == 'name_asc' ? 'active' : '' }}">
+                                            <a href="{{ request()->fullUrlWithQuery(['sort'=>'name_asc','page'=>1]) }}" title="Tên A-Z"><i></i>Tên
                                                 A-Z</a>
                                         </li>
-                                        <li class="btn-quick-sort alpha-desc">
-                                            <a href="javascript:;"
+                                        <li class="btn-quick-sort alpha-desc {{ $sort == 'name_desc' ? 'active' : '' }}">
+                                            <a href="{{ request()->fullUrlWithQuery(['sort'=>'name_desc','page'=>1]) }}"
                                                title="Tên Z-A"><i></i>Tên Z-A</a>
                                         </li>
-                                        <li class="btn-quick-sort position-desc">
-                                            <a href="javascript:;"
-                                               title="Hàng mới"><i></i>Hàng mới</a>
-                                        </li>
-                                        <li class="btn-quick-sort price-asc">
-                                            <a href="javascript:;"
+
+                                        <li class="btn-quick-sort price-asc {{ $sort == 'price_asc' ? 'active' : '' }}">
+                                            <a href="{{ request()->fullUrlWithQuery(['sort'=>'price_asc','page'=>1]) }}"
                                                title="Giá thấp đến cao"><i></i>Giá thấp đến cao</a>
                                         </li>
-                                        <li class="btn-quick-sort price-desc">
-                                            <a href="javascript:;"
+                                        <li class="btn-quick-sort price-desc {{ $sort == 'price_desc' ? 'active' : '' }}">
+                                            <a href="{{ request()->fullUrlWithQuery(['sort'=>'price_desc','page'=>1]) }}"
                                                title="Giá cao xuống thấp"><i></i>Giá cao xuống thấp</a>
                                         </li>
                                     </ul>
@@ -669,4 +711,67 @@
             }
         });
     </script>
+    <script>
+        (function(){
+            const box = document.querySelector('.sort-cate-right');
+            if (!box) return;
+
+            const trigger = box.querySelector('h3');
+            const list = box.querySelector('ul');
+
+            function openMenu(){
+                box.classList.add('open');
+                // set height đúng bằng nội dung để transition mượt
+                list.style.height = list.scrollHeight + 'px';
+            }
+            function closeMenu(){
+                // set height về 0 để animate đóng
+                list.style.height = '0px';
+                // sau khi đóng xong mới ẩn class open
+                list.addEventListener('transitionend', function te(e){
+                    if (e.propertyName === 'height') {
+                        box.classList.remove('open');
+                        list.removeEventListener('transitionend', te);
+                    }
+                });
+            }
+            function toggleMenu(){
+                if (box.classList.contains('open')) closeMenu(); else openMenu();
+            }
+
+            // Click vào tiêu đề để mở/đóng
+            trigger.addEventListener('click', toggleMenu);
+
+            // Click ra ngoài thì đóng
+            document.addEventListener('click', function(e){
+                if (!box.contains(e.target) && box.classList.contains('open')) closeMenu();
+            });
+
+            // ESC để đóng
+            document.addEventListener('keydown', function(e){
+                if (e.key === 'Escape' && box.classList.contains('open')) closeMenu();
+            });
+
+            // Nếu cần: chọn item rồi tự đóng menu
+            list.addEventListener('click', function(e){
+                const a = e.target.closest('a');
+                if (!a) return;
+                // set active
+                list.querySelectorAll('li').forEach(li => li.classList.remove('active'));
+                const li = a.closest('li'); if (li) li.classList.add('active');
+                // đóng menu
+                closeMenu();
+            });
+
+            // Nếu layout thay đổi (responsive, font load...), cập nhật height khi đang mở
+            const ro = new ResizeObserver(() => {
+                if (box.classList.contains('open')) {
+                    list.style.height = list.scrollHeight + 'px';
+                }
+            });
+            ro.observe(list);
+        })();
+    </script>
+
+
 @endpush

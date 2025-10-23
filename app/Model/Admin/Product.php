@@ -110,7 +110,7 @@ class Product extends BaseModel
 
     public function attributeValues()
     {
-        return $this->belongsToMany(Attribute::class, 'attribute_values', 'product_id', 'attribute_id')->withPivot('value');
+        return $this->belongsToMany(Attribute::class, 'attribute_values', 'product_id', 'attribute_id')->withPivot(['id', 'value']);
     }
 
     public function manufacturer()

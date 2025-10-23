@@ -40,17 +40,13 @@ class CartController extends Controller
     public function addItem(Request $request, $productId)
     {
         $product = Product::query()->find($productId);
-        $arr_index = [];
-        if(isset($request['attributes'])) {
-            foreach ($request['attributes'] as $attribute) {
-                $arr_index[] = [
-                    'index' => intval($attribute['index']),
-                    'value' => $attribute['value']
-                ];
-            }
-            sort($arr_index);
-        }
-        $uniqueId = isset($arr_index) ? $product->id . '-' . json_encode($arr_index) : $product->id;
+
+        $valAttrIds = (array) $request->input('attribute_value_ids', []);   // [173, 176]
+        $valAttrIds = array_map('intval', $valAttrIds);
+        $valAttrIds = array_values(array_unique($valAttrIds));
+
+        $suffix   = implode('-', $valAttrIds);
+        $uniqueId = $product->id . ($suffix ? '-' . $suffix : '');
 
         \Cart::add([
             'id' => $uniqueId,
@@ -61,7 +57,7 @@ class CartController extends Controller
                 'image' => $product->image->path ?? '',
                 'slug' => $product->slug,
                 'base_price' => $product->base_price,
-                'attributes' => $request['attributes']
+                'attributes' => implode(' - ', $request->attribute_value_labels)
             ]
         ]);
 

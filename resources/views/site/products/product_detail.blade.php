@@ -47,7 +47,7 @@
             </ul>
         </div>
     </section>
-    <section class="product layout-product" >
+    <section class="product layout-product" ng-controller="productDetailPage">
 
         <div class="container">
             <div class="details-product">
@@ -226,34 +226,29 @@
 
                                         <div class="select-swatch">
 
-
                                             @foreach($product->attributes as $keyAttr => $attribute)
-                                                <div class="swatch clearfix" data-option-index="{{ $keyAttr }}">
+                                                <div class="swatch clearfix"
+                                                     data-option-index="{{ $keyAttr }}"
+                                                     @if(!empty($attribute['id'])) data-attr-id="{{ $attribute['id'] }}" @endif>
                                                     <div class="header">
                                                         {{ $attribute['name'] }}:
                                                         <span class="value-roperties"></span>
                                                     </div>
 
                                                     @foreach($attribute['values'] as $keyVal => $val)
-                                                        <div data-value="{{ $val }}"
-                                                             title="{{ $val }}"
-                                                             class="swatch-element {{ $keyAttr }}-{{ $keyVal }} available">
+                                                        @php $vid = $val['id']; $vlabel = $val['value']; @endphp
 
-                                                            <!-- name CÙNG NHAU theo $keyAttr để radio trở thành 1 nhóm -->
+                                                        <div class="swatch-element {{ $keyAttr }}-{{ $keyVal }} available"
+                                                             data-id="{{ $vid }}" data-value="{{ $vlabel }}" title="{{ $vlabel }}">
                                                             <input id="swatch-{{ $keyAttr }}-{{ $keyVal }}"
                                                                    type="radio"
-                                                                   name="option-{{ $keyAttr }}"
-                                                                   value="{{ $val }}" />
-
-                                                            <label for="swatch-{{ $keyAttr }}-{{ $keyVal }}">
-                                                                {{ $val }}
-                                                            </label>
+                                                                   name="option-{{ !empty($attribute['id']) ? $attribute['id'] : $keyAttr }}"
+                                                                   value="{{ $vid }}" />
+                                                            <label for="swatch-{{ $keyAttr }}-{{ $keyVal }}">{{ $vlabel }}</label>
                                                         </div>
                                                     @endforeach
                                                 </div>
                                             @endforeach
-
-
 
 
 
@@ -282,7 +277,7 @@
                                                 </div>
                                                 <div class="btn-mua button_actions">
 
-                                                    <button type="submit"
+                                                    <button type="button" ng-click="addToCart({{ $product->id }})"
                                                             class="btn btn_base normal_button btn_add_cart add_to_cart btn-cart">
                                                         <span class="txt-main">Thêm vào giỏ</span>
                                                     </button>
@@ -1517,7 +1512,126 @@
 
 @push('script')
 
+    <script>
+        app.controller('productDetailPage', function ($rootScope, $scope, $interval, $timeout, cartItemSync) {
+            $scope.addToCart = function (productId) {
+                var currentVal = parseInt(jQuery('input[name="quantity"]').val());
+                url = "{{route('cart.add.item', ['productId' => 'productId'])}}";
+                url = url.replace('productId', productId);
 
+                // mảng value attributes khi click chọn
+                var selectedValueIds = [];
+                var selectedValueLabels = [];
+                var missing = [];
+
+                jQuery('.swatch').each(function () {
+                    var $sw = jQuery(this);
+                    var $checked = $sw.find('input[type=radio]:checked');
+
+                    if ($checked.length) {
+                        // id (vid)
+                        var vid = parseInt($checked.val(), 10);
+                        selectedValueIds.push(vid);
+
+                        // label (vlabel)
+                        // ưu tiên lấy từ .swatch-element đang selected
+                        var $el = $checked.closest('.swatch-element');
+                        var vlabel = ($el.data('value') || '').toString().trim();
+
+                        // nếu vì lý do nào đó không có data-value, fallback sang text của <label>
+                        if (!vlabel) {
+                            vlabel = ($el.find('label').text() || '').trim();
+                        }
+
+                        selectedValueLabels.push(vlabel);
+                    } else {
+                        var name = $sw.find('.header').text().trim();
+                        missing.push(name);
+                    }
+                });
+
+                if (missing.length) {
+                    alert('Vui lòng chọn: \n- ' + missing.join('\n- '));
+                    return;
+                }
+
+
+                jQuery.ajax({
+                    type: 'POST',
+                    url: url,
+                    headers: {
+                        'X-CSRF-TOKEN': CSRF_TOKEN
+                    },
+                    data: {
+                        qty: currentVal,
+                        attribute_value_ids: selectedValueIds,
+                        attribute_value_labels: selectedValueLabels
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            $interval.cancel($rootScope.promise);
+                            $rootScope.promise = $interval(function () {
+                                cartItemSync.items = response.items;
+                                cartItemSync.total = response.total;
+                                cartItemSync.count = response.count;
+                            }, 1000);
+
+                            toastr.success('Đã thêm sản phẩm vào giỏ hàng');
+
+                        }
+                    },
+                    error: function () {
+                        jQuery.toast('Thao tác thất bại !')
+                    },
+                    complete: function () {
+                        $scope.$applyAsync();
+                    }
+                });
+            }
+
+            $scope.buyNow = function (productId) {
+                var currentVal = parseInt(jQuery('input[name="quantity"]').val());
+                url = "{{route('cart.add.item', ['productId' => 'productId', 'variantId' => 'variantId'])}}";
+                url = url.replace('productId', productId);
+                url = url.replace('variantId', $scope.selectedVariantId);
+                console.log(productId)
+                console.log($scope.selectedVariantId)
+                jQuery.ajax({
+                    type: 'POST',
+                    url: url,
+                    headers: {
+                        'X-CSRF-TOKEN': CSRF_TOKEN
+                    },
+                    data: {
+                        'qty': currentVal
+                    },
+                    success: function (response) {
+                        if (response.success) {
+                            $interval.cancel($rootScope.promise);
+                            $rootScope.promise = $interval(function () {
+                                cartItemSync.items = response.items;
+                                cartItemSync.total = response.total;
+                                cartItemSync.count = response.count;
+                            }, 1000);
+
+                            toastr.success('Đã thêm sản phẩm vào giỏ hàng');
+                            window.location.href = "{{ route('cart.index') }}";
+
+                        }
+                    },
+                    error: function () {
+                        jQuery.toast('Thao tác thất bại !')
+                    },
+                    complete: function () {
+                        $scope.$applyAsync();
+                    }
+                });
+            }
+
+
+
+        })
+    </script>
 
     <script>
         document.addEventListener('click', function (e) {
@@ -1531,36 +1645,35 @@
             const valueSpan = swatch.querySelector('.value-roperties');
             const currentSelected = swatch.querySelector('.swatch-element.selected');
 
-            // Nếu đang chọn rồi và người dùng click lại -> BỎ CHỌN
+            // Click lại để bỏ chọn
             if (el.classList.contains('selected')) {
-                e.preventDefault(); // chặn radio tự toggle lại
+                e.preventDefault();
                 el.classList.remove('selected');
                 if (input) input.checked = false;
                 if (valueSpan) valueSpan.textContent = '';
                 return;
             }
 
-            // Chọn mới: bỏ chọn cái cũ trong cùng .swatch
+            // Bỏ chọn cũ
             if (currentSelected) {
                 currentSelected.classList.remove('selected');
                 const prevInput = currentSelected.querySelector('input[type="radio"]');
                 if (prevInput) prevInput.checked = false;
             }
 
+            // Chọn mới
             el.classList.add('selected');
             if (input) {
                 input.checked = true;
-                // phát sự kiện change nếu bạn cần lắng nghe nơi khác
                 input.dispatchEvent(new Event('change', { bubbles: true }));
             }
-
             if (valueSpan) {
-                valueSpan.textContent = el.dataset.value || (input ? input.value : '');
-                console.log( valueSpan)
+                // Hiển thị TEXT từ data-value (ví dụ "50x50 cm")
+                valueSpan.textContent = el.dataset.value || '';
             }
         });
 
-        // Khởi tạo trạng thái khi trang load (nếu có radio được check sẵn từ server)
+        // Khởi tạo nếu server có check sẵn
         window.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.swatch').forEach(function (swatch) {
                 const checked = swatch.querySelector('input[type="radio"]:checked');
@@ -1568,12 +1681,13 @@
                 if (checked) {
                     const el = checked.closest('.swatch-element');
                     if (el) el.classList.add('selected');
-                    if (valueSpan) valueSpan.textContent = checked.value;
+                    if (valueSpan) valueSpan.textContent = el?.dataset?.value || '';
                 } else if (valueSpan) {
                     valueSpan.textContent = '';
                 }
             });
         });
     </script>
+
 
 @endpush

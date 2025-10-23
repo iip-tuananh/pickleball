@@ -1,4 +1,5 @@
-<header class="header">
+<header class="header" ng-controller="headerPartial">
+
     <div class="topbar">
         <div class="container">
             <div class="header-promo">
@@ -212,24 +213,49 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="sudes-header-cart header-action_cart">
+                        <div class="sudes-header-cart header-action_cart" id="headerMiniCart">
                             <div class="frame-fix">
                                 <a class="a-hea" href="/cart" aria-label="Giỏ hàng" title="Giỏ hàng"></a>
-                                <span class="box-icon">
-                                        <svg aria-hidden="true" class="svg-icon " viewBox="0 0 32 32">
-                                            <path
-                                                d="M7.873 6.008A1.01 1.01 0 018 6h21a1 1 0 011 1v11a1 1 0 01-.836.986l-18 3a1 1 0 01-1.128-.72L5.318 4.281l-2.002.668a1 1 0 01-.632-1.898l3-1a1 1 0 011.28.681l.91 3.276zM8.427 8l3.296 11.864L28 17.153V8H8.427zM16 29a3 3 0 110-6 3 3 0 010 6zm9 0a3 3 0 110-6 3 3 0 010 6zm0-2a1 1 0 100-2 1 1 0 000 2zm-9 0a1 1 0 100-2 1 1 0 000 2z">
-                                            </path>
-                                        </svg>
-                                    </span>
-                                <span class="count_item count_item_pr"></span>
+                                <span class="box-icon" aria-hidden="true">
+      <svg class="svg-icon" viewBox="0 0 32 32"><path d="M7.873 6.008A1.01 1.01 0 018 6h21a1 1 0 011 1v11a1 1 0 01-.836.986l-18 3a1 1 0 01-1.128-.72L5.318 4.281l-2.002.668a1 1 0 01-.632-1.898l3-1a1 1 0 011.28.681l.91 3.276zM8.427 8l3.296 11.864L28 17.153V8H8.427zM16 29a3 3 0 110-6 3 3 0 010 6zm9 0a3 3 0 110-6 3 3 0 010 6zm0-2a1 1 0 100-2 1 1 0 000 2zm-9 0a1 1 0 100-2 1 1 0 000 2z"></path></svg>
+    </span>
+                                <span class="count_item count_item_pr" id="miniCartCount"><% cart.count %></span>
                                 <span class="item-title hidden-xs">Giỏ hàng</span>
                             </div>
-                            <div class="top-cart-content">
-                                <div class="CartHeaderContainer">
+
+                            <div class="top-cart-content" role="dialog" aria-label="Giỏ hàng mini">
+                                <div class="cart-panel">
+                                    <h4 class="cart-title">GIỎ HÀNG</h4>
+
+                                    <div class="CartHeaderContainer">
+                                        <!-- Item (demo) -->
+                                        <div class="mini-cart-item" ng-repeat="item in cart.items">
+                                            <a class="thumb" href="/san-pham/<% item.attributes.slug %>.html">
+                                                <img ng-src="<% item.attributes.image %>" alt="<% item.name %>">
+                                            </a>
+                                            <div class="meta">
+                                                <a class="name" href="/san-pham/<% item.attributes.slug %>.html"><% item.name %> x <% item.quantity %></a>
+                                                <span> <% item.attributes.attributes %> </span>
+                                                <div class="price"><% item.price | number %>đ</div>
+                                            </div>
+                                            <button class="remove" aria-label="Xoá" ng-click="removeItem(item.id)">
+                                                <span>&times;</span>
+                                            </button>
+                                        </div>
+                                        <!-- /Item -->
+                                    </div>
+
+                                    <div class="cart-footer">
+                                        <div class="total">
+                                            <span>Tổng tiền:</span>
+                                            <strong class="total-price" id="miniCartTotal"><% cart.total | number %>đ</strong>
+                                        </div>
+                                        <a class="btn-checkout" href="">Xem giỏ hàng</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

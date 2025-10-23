@@ -177,14 +177,19 @@ class FrontController extends Controller
         ])->where('slug', $slug)->first();
         $attributes = [];
         foreach ($product->attributeValues as $attribute) {
-            if (!isset($attributes[$attribute->id])) {
-                $attributes[$attribute->id] = [
-                    'name' => $attribute->name,
-                    'values' => [$attribute->pivot->value]
+            $attrId = $attribute->id;
+
+            if (!isset($attributes[$attrId])) {
+                $attributes[$attrId] = [
+                    'name'   => $attribute->name,
+                    'values' => [],
                 ];
-            } else {
-                $attributes[$attribute->id]['values'][] = $attribute->pivot->value;
             }
+
+            $attributes[$attrId]['values'][] = [
+                'id'    => $attribute->pivot->id,
+                'value' => $attribute->pivot->value,
+            ];
         }
         $product->attributes = array_values($attributes);
 
@@ -236,6 +241,22 @@ class FrontController extends Controller
 
     public function showProductCategory(Request $request, $categorySlug = null)
     {
+        $sortMap = [
+            'name_asc'   => ['name', 'asc'],
+            'name_desc'  => ['name', 'desc'],
+            'price_asc'  => ['price', 'asc'],
+            'price_desc' => ['price', 'desc'],
+            'date_asc'   => ['created_at', 'asc'],
+            'date_desc'  => ['created_at', 'desc'],
+        ];
+        if (isset($sortMap[$request->get('sort')])) {
+            list($sortColumn, $sortDirection) = $sortMap[$request->get('sort')];
+        } else {
+            $sortColumn = 'id';
+            $sortDirection = 'desc';
+        }
+
+
         $categories = Category::parent()->with('products')->orderBy('sort_order')->get();
         $category = Category::with(['childs'])->where('slug', $categorySlug)->first();
 
@@ -273,7 +294,9 @@ class FrontController extends Controller
                         $q->whereIn('id', array_unique($request_product_ids));
                     }
                 })
-                ->where('status', 1)->whereIn('cate_id', $arr_category_id)->orderBy('created_at', 'desc')->paginate(20);
+                ->where('status', 1)->whereIn('cate_id', $arr_category_id)
+                ->orderBy($sortColumn, $sortDirection)
+                ->paginate(20)->appends($request->only('sort'));
         } else {
             $category = CategorySpecial::findBySlug($categorySlug);
             $arr_product_ids = $category->products()->pluck('product_id')->toArray();
@@ -287,7 +310,10 @@ class FrontController extends Controller
                         $q->whereIn('products.id', $request_product_ids);
                     }
                 })
-                ->where('products.status', 1)->orderBy('products.created_at', 'desc')->paginate(20);
+                ->where('products.status', 1)
+                ->orderBy($sortColumn, $sortDirection)
+                ->paginate(20)->appends($request->only('sort'));
+
             $attributes = Attribute::query()->with(['tags' => function ($q) use ($arr_product_ids) {
                 $q->with(['products' => function ($q) use ($arr_product_ids) {
                     $q->where('products.status', 1)->whereIn('products.id', array_unique($arr_product_ids));
