@@ -1,4 +1,4 @@
-<header class="header" ng-controller="headerPartial">
+<header class="header" ng-controller="headerPartial" ng-cloak>
 
     <div class="topbar">
         <div class="container">
@@ -35,11 +35,64 @@
                             <span class="title">Menu</span>
                         </div>
                         <a href="{{ route('front.home-page') }}" class="logo-wrapper" title="{{ $config->web_title }}">
-                            <img width="250" height="43"
-                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"
-                                data-src="{{ $config->image ? $config->image->path : 'https://placehold.co/250x43' }}"
-                                alt="{{ $config->web_title }}" class="lazyload">
+                            <div class="logo-wrapper-inner">
+                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"
+                                        data-src="{{ $config->image ? $config->image->path : 'https://placehold.co/250x43' }}"
+                                        alt="{{ $config->web_title }}" class="lazyload">
+                            </div>
                         </a>
+                        <style>
+                            header.header .main-header .align-items-center .header-logo .logo-wrapper .logo-wrapper-inner {
+                                position: absolute;
+                                bottom: -15px;
+                                left: 0;
+                                right: 0;
+                                z-index: 1;
+                                width: 100%;
+                                height: 110px;
+                                margin: auto;
+                                background: #022d3a;
+                            }
+                            header.header .main-header .align-items-center .header-logo .logo-wrapper .logo-wrapper-inner img {
+                                width: 100%;
+                                height: 100%;
+                                object-fit: contain;
+                                object-position: center;
+                                z-index: 1;
+                                padding-top: 6px;
+                            }
+
+                            @media (max-width: 768px) {
+
+                                header.header .main-header .align-items-center .header-logo .logo-wrapper .logo-wrapper-inner img {
+                                    padding-top: 0;
+                                }
+                                header.header .main-header .align-items-center .header-logo .logo-wrapper .logo-wrapper-inner {
+                                    height: 56px;
+                                    position: relative;
+                                    bottom: 0;
+                                }
+                            }
+
+                            @media (max-width: 768px) {
+                                header.header .main-header .align-items-center .header-logo .logo-wrapper {
+                                    max-width: 640px;
+                                    width: 285px;
+                                }
+                            }
+                            @media (max-width: 375px) {
+                                header.header .main-header .align-items-center .header-logo .logo-wrapper {
+                                    width: 254px;
+                                    max-width: 260px;
+                                }
+                            }
+                            @media (max-width: 320px) {
+                                header.header .main-header .align-items-center .header-logo .logo-wrapper {
+                                    width: 240px;
+                                    max-width: 240px;
+                                }
+                            }
+                        </style>
                     </div>
                     <div class="header-mid">
                         <div class="list-top-item header_tim_kiem">
@@ -135,7 +188,7 @@
                         </div>
                         <div class="sudes-header-stores hidden-xs">
                             <div class="frame-fix">
-                                <a href="#" title="Hệ thống sân pickleball"></a>
+                                <a href="{{ route('front.showroom') }}" title="Hệ thống sân pickleball"></a>
                                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -149,74 +202,79 @@
                             </div>
                         </div>
 
-{{--                        <div class="sudes-header-account header-action_account">--}}
-{{--                            <div class="frame-fix">--}}
-{{--                                <a href="javascript:;" class="header-account" aria-label="Tài khoản"--}}
-{{--                                   title="Tài khoản"></a>--}}
-{{--                                <svg aria-hidden="true" class="svg-icon tool-icon" viewBox="0 0 32 32">--}}
-{{--                                    <path--}}
-{{--                                        d="M7.164 29.986a1 1 0 01-1.148-1.165l2-11A1 1 0 019 17h14a1 1 0 01.97.757l2 8a1 1 0 01-.806 1.23l-18 3zm1.074-2.206l15.53-2.588L22.218 19H9.835l-1.597 8.78zM16 15c-3.314 0-6-2.91-6-6.5S12.686 2 16 2s6 2.91 6 6.5-2.686 6.5-6 6.5zm0-2c2.172 0 4-1.98 4-4.5S18.172 4 16 4c-2.172 0-4 1.98-4 4.5s1.828 4.5 4 4.5z">--}}
-{{--                                    </path>--}}
-{{--                                </svg>--}}
-{{--                                <div class="text-box">--}}
-{{--                                    <span class="acc-text-small hidden-xs">Thông tin</span>--}}
-{{--                                    <span class="acc-text">--}}
-{{--                                            Tài khoản--}}
-{{--                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"--}}
-{{--                                                 fill="currentColor" class="bi bi-caret-down-fill"--}}
-{{--                                                 viewBox="0 0 16 16">--}}
-{{--                                                <path--}}
-{{--                                                    d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />--}}
-{{--                                            </svg>--}}
-{{--                                        </span>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <ul>--}}
-{{--                                <li class="li-account">--}}
-{{--                                    <a rel="nofollow" href="/account/login" title="Đăng nhập">--}}
-{{--                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"--}}
-{{--                                             fill="currentColor" class="bi bi-box-arrow-in-right"--}}
-{{--                                             viewBox="0 0 16 16">--}}
-{{--                                            <path fill-rule="evenodd"--}}
-{{--                                                  d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z" />--}}
-{{--                                            <path fill-rule="evenodd"--}}
-{{--                                                  d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />--}}
-{{--                                        </svg>--}}
-{{--                                        Đăng nhập--}}
-{{--                                    </a>--}}
-{{--                                </li>--}}
-{{--                                <li class="li-account">--}}
-{{--                                    <a rel="nofollow" href="/account/register" title="Đăng ký">--}}
-{{--                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"--}}
-{{--                                             fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16">--}}
-{{--                                            <path--}}
-{{--                                                d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />--}}
-{{--                                            <path fill-rule="evenodd"--}}
-{{--                                                  d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />--}}
-{{--                                        </svg>--}}
-{{--                                        Đăng ký--}}
-{{--                                    </a>--}}
-{{--                                </li>--}}
-{{--                                <li class="li-account">--}}
-{{--                                    <a rel="nofollow" href="/danh-sach-yeu-thich" title="Danh sách yêu thích">--}}
-{{--                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"--}}
-{{--                                             fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">--}}
-{{--                                            <path--}}
-{{--                                                d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />--}}
-{{--                                        </svg>--}}
-{{--                                        Danh sách yêu thích (<span class="js-wishlist-count">0</span>)--}}
-{{--                                    </a>--}}
-{{--                                </li>--}}
-{{--                            </ul>--}}
-{{--                        </div>--}}
+                        {{--                        <div class="sudes-header-account header-action_account"> --}}
+                        {{--                            <div class="frame-fix"> --}}
+                        {{--                                <a href="javascript:;" class="header-account" aria-label="Tài khoản" --}}
+                        {{--                                   title="Tài khoản"></a> --}}
+                        {{--                                <svg aria-hidden="true" class="svg-icon tool-icon" viewBox="0 0 32 32"> --}}
+                        {{--                                    <path --}}
+                        {{--                                        d="M7.164 29.986a1 1 0 01-1.148-1.165l2-11A1 1 0 019 17h14a1 1 0 01.97.757l2 8a1 1 0 01-.806 1.23l-18 3zm1.074-2.206l15.53-2.588L22.218 19H9.835l-1.597 8.78zM16 15c-3.314 0-6-2.91-6-6.5S12.686 2 16 2s6 2.91 6 6.5-2.686 6.5-6 6.5zm0-2c2.172 0 4-1.98 4-4.5S18.172 4 16 4c-2.172 0-4 1.98-4 4.5s1.828 4.5 4 4.5z"> --}}
+                        {{--                                    </path> --}}
+                        {{--                                </svg> --}}
+                        {{--                                <div class="text-box"> --}}
+                        {{--                                    <span class="acc-text-small hidden-xs">Thông tin</span> --}}
+                        {{--                                    <span class="acc-text"> --}}
+                        {{--                                            Tài khoản --}}
+                        {{--                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" --}}
+                        {{--                                                 fill="currentColor" class="bi bi-caret-down-fill" --}}
+                        {{--                                                 viewBox="0 0 16 16"> --}}
+                        {{--                                                <path --}}
+                        {{--                                                    d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" /> --}}
+                        {{--                                            </svg> --}}
+                        {{--                                        </span> --}}
+                        {{--                                </div> --}}
+                        {{--                            </div> --}}
+                        {{--                            <ul> --}}
+                        {{--                                <li class="li-account"> --}}
+                        {{--                                    <a rel="nofollow" href="/account/login" title="Đăng nhập"> --}}
+                        {{--                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" --}}
+                        {{--                                             fill="currentColor" class="bi bi-box-arrow-in-right" --}}
+                        {{--                                             viewBox="0 0 16 16"> --}}
+                        {{--                                            <path fill-rule="evenodd" --}}
+                        {{--                                                  d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z" /> --}}
+                        {{--                                            <path fill-rule="evenodd" --}}
+                        {{--                                                  d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" /> --}}
+                        {{--                                        </svg> --}}
+                        {{--                                        Đăng nhập --}}
+                        {{--                                    </a> --}}
+                        {{--                                </li> --}}
+                        {{--                                <li class="li-account"> --}}
+                        {{--                                    <a rel="nofollow" href="/account/register" title="Đăng ký"> --}}
+                        {{--                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" --}}
+                        {{--                                             fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16"> --}}
+                        {{--                                            <path --}}
+                        {{--                                                d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" /> --}}
+                        {{--                                            <path fill-rule="evenodd" --}}
+                        {{--                                                  d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" /> --}}
+                        {{--                                        </svg> --}}
+                        {{--                                        Đăng ký --}}
+                        {{--                                    </a> --}}
+                        {{--                                </li> --}}
+                        {{--                                <li class="li-account"> --}}
+                        {{--                                    <a rel="nofollow" href="/danh-sach-yeu-thich" title="Danh sách yêu thích"> --}}
+                        {{--                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" --}}
+                        {{--                                             fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16"> --}}
+                        {{--                                            <path --}}
+                        {{--                                                d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" /> --}}
+                        {{--                                        </svg> --}}
+                        {{--                                        Danh sách yêu thích (<span class="js-wishlist-count">0</span>) --}}
+                        {{--                                    </a> --}}
+                        {{--                                </li> --}}
+                        {{--                            </ul> --}}
+                        {{--                        </div> --}}
 
                         <div class="sudes-header-cart header-action_cart" id="headerMiniCart">
                             <div class="frame-fix">
                                 <a class="a-hea" href="/cart" aria-label="Giỏ hàng" title="Giỏ hàng"></a>
                                 <span class="box-icon" aria-hidden="true">
-      <svg class="svg-icon" viewBox="0 0 32 32"><path d="M7.873 6.008A1.01 1.01 0 018 6h21a1 1 0 011 1v11a1 1 0 01-.836.986l-18 3a1 1 0 01-1.128-.72L5.318 4.281l-2.002.668a1 1 0 01-.632-1.898l3-1a1 1 0 011.28.681l.91 3.276zM8.427 8l3.296 11.864L28 17.153V8H8.427zM16 29a3 3 0 110-6 3 3 0 010 6zm9 0a3 3 0 110-6 3 3 0 010 6zm0-2a1 1 0 100-2 1 1 0 000 2zm-9 0a1 1 0 100-2 1 1 0 000 2z"></path></svg>
-    </span>
-                                <span class="count_item count_item_pr" id="miniCartCount"><% cart.count %></span>
+                                    <svg class="svg-icon" viewBox="0 0 32 32">
+                                        <path
+                                            d="M7.873 6.008A1.01 1.01 0 018 6h21a1 1 0 011 1v11a1 1 0 01-.836.986l-18 3a1 1 0 01-1.128-.72L5.318 4.281l-2.002.668a1 1 0 01-.632-1.898l3-1a1 1 0 011.28.681l.91 3.276zM8.427 8l3.296 11.864L28 17.153V8H8.427zM16 29a3 3 0 110-6 3 3 0 010 6zm9 0a3 3 0 110-6 3 3 0 010 6zm0-2a1 1 0 100-2 1 1 0 000 2zm-9 0a1 1 0 100-2 1 1 0 000 2z">
+                                        </path>
+                                    </svg>
+                                </span>
+                                <span class="count_item count_item_pr" id="miniCartCount"
+                                    ng-if="cart.count > 0"><% cart.count %></span>
                                 <span class="item-title hidden-xs">Giỏ hàng</span>
                             </div>
 
@@ -231,7 +289,9 @@
                                                 <img ng-src="<% item.attributes.image %>" alt="<% item.name %>">
                                             </a>
                                             <div class="meta">
-                                                <a class="name" href="/san-pham/<% item.attributes.slug %>.html"><% item.name %> x <% item.quantity %></a>
+                                                <a class="name"
+                                                    href="/san-pham/<% item.attributes.slug %>.html"><% item.name %> x
+                                                    <% item.quantity %></a>
                                                 <span> <% item.attributes.attributes %> </span>
                                                 <div class="price"><% item.price | number %>đ</div>
                                             </div>
@@ -245,7 +305,8 @@
                                     <div class="cart-footer">
                                         <div class="total">
                                             <span>Tổng tiền:</span>
-                                            <strong class="total-price" id="miniCartTotal"><% cart.total | number %>đ</strong>
+                                            <strong class="total-price"
+                                                id="miniCartTotal"><% cart.total | number %>đ</strong>
                                         </div>
                                         <a class="btn-checkout" href="{{ route('cart.index') }}">Xem giỏ hàng</a>
                                     </div>
@@ -270,50 +331,55 @@
             <div class="col-menu" data-section="header_nav">
                 <ul id="nav-col" class="nav-col">
                     @foreach ($productCategories as $category)
-                    <li class="nav-item has-childs  ">
-                        <a href="{{ route('front.show-product-category', $category->slug)}}" class="nav-link" title="{{$category->name}}">
-                            <div class="group-category-image">
-                                <img class="img-fluid lazyload"
-                                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"
-                                    data-src="//bizweb.dktcdn.net/thumb/small/100/490/431/collections/sports.png?v=1693640338110"
-                                    alt="{{$category->name}}" />
-                            </div>
-                            {{$category->name}}
-                            @if ($category->childs->count())
-                            <i class="open_mnu down_icon"></i>
-                            @endif
-                        </a>
-                        @if ($category->childs->count())
-                        <ul class="dropdown-menu">
-                            @foreach ($category->childs as $child)
-                            <li class="dropdown-submenu nav-item-lv2 has-childs2">
-                                <a class="nav-link" href="{{ route('front.show-product-category', $child->slug)}}" title="{{$child->name}}">
-                                    {{$child->name}}
-                                    @if ($child->childs->count())
+                        <li class="nav-item has-childs  ">
+                            <a href="{{ route('front.show-product-category', $category->slug) }}" class="nav-link"
+                                title="{{ $category->name }}">
+                                <div class="group-category-image">
+                                    <img class="img-fluid lazyload"
+                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"
+                                        data-src="//bizweb.dktcdn.net/thumb/small/100/490/431/collections/sports.png?v=1693640338110"
+                                        alt="{{ $category->name }}" />
+                                </div>
+                                {{ $category->name }}
+                                @if ($category->childs->count())
                                     <i class="open_mnu down_icon"></i>
-                                    @endif
-                                </a>
-                                @if ($child->childs->count())
+                                @endif
+                            </a>
+                            @if ($category->childs->count())
                                 <ul class="dropdown-menu">
-                                    @foreach ($child->childs as $chi)
-                                    <li class="nav-item-lv3">
-                                        <a class="nav-link" href="{{ route('front.show-product-category', $chi->slug)}}" title="{{$chi->name}}">{{$chi->name}}</a>
-                                    </li>
+                                    @foreach ($category->childs as $child)
+                                        <li class="dropdown-submenu nav-item-lv2 has-childs2">
+                                            <a class="nav-link"
+                                                href="{{ route('front.show-product-category', $child->slug) }}"
+                                                title="{{ $child->name }}">
+                                                {{ $child->name }}
+                                                @if ($child->childs->count())
+                                                    <i class="open_mnu down_icon"></i>
+                                                @endif
+                                            </a>
+                                            @if ($child->childs->count())
+                                                <ul class="dropdown-menu">
+                                                    @foreach ($child->childs as $chi)
+                                                        <li class="nav-item-lv3">
+                                                            <a class="nav-link"
+                                                                href="{{ route('front.show-product-category', $chi->slug) }}"
+                                                                title="{{ $chi->name }}">{{ $chi->name }}</a>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+                                        </li>
                                     @endforeach
                                 </ul>
-                                @endif
-                            </li>
-                            @endforeach
-                        </ul>
-                        @endif
+                            @endif
 
-                    </li>
+                        </li>
                     @endforeach
                 </ul>
                 <ul id="nav" class="nav">
                     <li class="nav-item ">
-                        <a class="nav-link" href="{{route('front.about-us')}}" title="Về Sudes Sport">
-                            Về {{$config->web_title}}
+                        <a class="nav-link" href="{{ route('front.about-us') }}" title="Về Sudes Sport">
+                            Về {{ $config->web_title }}
                         </a>
                     </li>
 
@@ -325,9 +391,10 @@
                         <ul class="dropdown-menu">
 
                             @foreach ($policies as $policy)
-                            <li class="nav-item-lv2">
-                                <a class="nav-link" href="{{route('front.policy-detail', $policy->slug)}}" title="{{$policy->title}}">{{$policy->title}}</a>
-                            </li>
+                                <li class="nav-item-lv2">
+                                    <a class="nav-link" href="{{ route('front.policy-detail', $policy->slug) }}"
+                                        title="{{ $policy->title }}">{{ $policy->title }}</a>
+                                </li>
                             @endforeach
                         </ul>
                     </li>
@@ -385,9 +452,10 @@
                         <ul class="dropdown-menu">
 
                             @foreach ($postCategories as $postCategory)
-                            <li class="nav-item-lv2">
-                                <a class="nav-link" href="{{ route('front.list-blog', $postCategory->slug)}}" title="{{$postCategory->name}}">{{$postCategory->name}}</a>
-                            </li>
+                                <li class="nav-item-lv2">
+                                    <a class="nav-link" href="{{ route('front.list-blog', $postCategory->slug) }}"
+                                        title="{{ $postCategory->name }}">{{ $postCategory->name }}</a>
+                                </li>
                             @endforeach
                         </ul>
                     </li>
@@ -404,7 +472,8 @@
             <div class="footer-menu">
                 <div class="sudes-header-hotline">
                     <div class="frame-fix">
-                        <a title="Điện thoại: {{$config->hotline}}" href="tel:{{str_replace(' ', '', $config->hotline)}}"></a>
+                        <a title="Điện thoại: {{ $config->hotline }}"
+                            href="tel:{{ str_replace(' ', '', $config->hotline) }}"></a>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                             class="bi bi-whatsapp" viewBox="0 0 16 16">
                             <path
@@ -412,13 +481,13 @@
                         </svg>
                         <div class="text-box">
                             <span class="acc-text-small">Hotline hỗ trợ:</span>
-                            <span class="acc-text">{{$config->hotline}}</span>
+                            <span class="acc-text">{{ $config->hotline }}</span>
                         </div>
                     </div>
                 </div>
                 <div class="sudes-header-stores">
                     <div class="frame-fix">
-                        <a href="#" title="Hệ thống sân pickleball"></a>
+                        <a href="{{ route('front.showroom') }}" title="Hệ thống sân pickleball"></a>
                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path

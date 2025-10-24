@@ -6,10 +6,10 @@ $(document).ready(function ($) {
 		$(this).toggleClass('active')
 		return false;
 	});
-	$('.add_to_cart').click(function(e){	
-		e.preventDefault();		
+	$('.add_to_cart').click(function(e){
+		e.preventDefault();
 		var $this = $(this);
-		var form = $this.parents('form');	
+		var form = $this.parents('form');
 		$.ajax({
 			type: 'POST',
 			url: '/cart/add.js',
@@ -28,10 +28,10 @@ $(document).ready(function ($) {
 });
 function callbackFuncGroup() {
 	awe_lazyloadImage();
-	$('.add_to_cart').click(function(e){	
-		e.preventDefault();		
+	$('.add_to_cart').click(function(e){
+		e.preventDefault();
 		var $this = $(this);
-		var form = $this.parents('form');	
+		var form = $this.parents('form');
 		$.ajax({
 			type: 'POST',
 			url: '/cart/add.js',
@@ -48,9 +48,9 @@ function callbackFuncGroup() {
 		});
 	});
 	runQuickView();
-	
-	favoriSudes.Wishlist.activityWishlist();
-	
+
+	// favoriSudes.Wishlist.activityWishlist();
+
 	if(window.BPR && window.BPR.loadBadges){
 		window.BPR.initDomEls()
 		window.BPR.loadBadges()
@@ -91,7 +91,7 @@ $(".not-dqtab").each( function(e){
 		etabs.find("."+tab_id).addClass('current');
 		//Nếu đã load rồi thì không load nữa
 		if(!$this2.hasClass('has-content')){
-			$this2.addClass('has-content');		
+			$this2.addClass('has-content');
 			getContentTab(url,"."+ datasection+" ."+tab_id);
 		}
 	});
@@ -107,7 +107,7 @@ $(".not-dqtab").each( function(e){
 		etabs.find("."+tab_id).addClass('current');
 		//Nếu đã load rồi thì không load nữa
 		if(!$this2.hasClass('has-content')){
-			$this2.addClass('has-content');		
+			$this2.addClass('has-content');
 			getContentTab2(url,"."+ datasection2+" ."+tab_id);
 		}
 	});
@@ -131,9 +131,9 @@ function getContentTab(url,selector){
 				ajaxSwiper(selector);
 				callbackFuncGroup();
 				$(selector + ' .add_to_cart').click(function(e){
-					e.preventDefault();		
+					e.preventDefault();
 					var $this = $(this);
-					var form = $this.parents('form');	
+					var form = $this.parents('form');
 					$.ajax({
 						type: 'POST',
 						url: '/cart/add.js',
@@ -172,9 +172,9 @@ function getContentTab2(url,selector){
 				if(window.BPR)
 					return window.BPR.initDomEls(), window.BPR.loadBadges();
 				$(selector + ' .add_to_cart').click(function(e){
-					e.preventDefault();		
+					e.preventDefault();
 					var $this = $(this);
-					var form = $this.parents('form');	
+					var form = $this.parents('form');
 					$.ajax({
 						type: 'POST',
 						url: '/cart/add.js',
@@ -333,7 +333,7 @@ $(".li-kmdiscount").click(function() {
 
 
 function lazyBlockProduct(sectionName, rootMargin, callback) {
-	
+
 	var section = $('.' + sectionName);
 	var template = $('script[data-template="' + sectionName + '"]').html();
 

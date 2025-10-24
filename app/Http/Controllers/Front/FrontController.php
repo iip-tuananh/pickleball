@@ -737,4 +737,13 @@ class FrontController extends Controller
         $description = $policy->title;
         return view('site.about_us', compact('content', 'title', 'policies', 'description'));
     }
+
+    // showroom
+    public function showroom()
+    {
+        $config = Config::query()->get()->first();
+        $content = $config->showroom;
+        $title = 'Hệ thống sân Pickleball';
+        return view('site.showroom', compact('content', 'title'));
+    }
 }

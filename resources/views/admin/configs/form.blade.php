@@ -200,6 +200,10 @@
                     <label class="form-label">Bài viết giới thiệu</label>
                     <textarea class="form-control ck-editor" ck-editor rows="5" ng-model="form.introduction"></textarea>
                 </div>
+                <div class="form-group custom-group">
+                    <label class="form-label">Hệ thống sân Pickleball</label>
+                    <textarea class="form-control ck-editor" ck-editor rows="5" ng-model="form.showroom"></textarea>
+                </div>
 			</div>
 			<div class="col-md-4 col-xs-12">
 				<div class="form-group text-center mb-4">

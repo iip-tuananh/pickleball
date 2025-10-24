@@ -6,7 +6,7 @@
     @yield('css')
 </head>
 
-<body ng-app="App">
+<body ng-app="App" ng-cloak>
     <div class="opacity_menu"></div>
 
     @include('site.partials.header')
