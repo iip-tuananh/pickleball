@@ -35,11 +35,64 @@
                             <span class="title">Menu</span>
                         </div>
                         <a href="{{ route('front.home-page') }}" class="logo-wrapper" title="{{ $config->web_title }}">
-                            <img width="250" height="43"
-                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"
-                                data-src="{{ $config->image ? $config->image->path : 'https://placehold.co/250x43' }}"
-                                alt="{{ $config->web_title }}" class="lazyload">
+                            <div class="logo-wrapper-inner">
+                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"
+                                        data-src="{{ $config->image ? $config->image->path : 'https://placehold.co/250x43' }}"
+                                        alt="{{ $config->web_title }}" class="lazyload">
+                            </div>
                         </a>
+                        <style>
+                            header.header .main-header .align-items-center .header-logo .logo-wrapper .logo-wrapper-inner {
+                                position: absolute;
+                                bottom: -15px;
+                                left: 0;
+                                right: 0;
+                                z-index: 1;
+                                width: 100%;
+                                height: 110px;
+                                margin: auto;
+                                background: #022d3a;
+                            }
+                            header.header .main-header .align-items-center .header-logo .logo-wrapper .logo-wrapper-inner img {
+                                width: 100%;
+                                height: 100%;
+                                object-fit: contain;
+                                object-position: center;
+                                z-index: 1;
+                                padding-top: 6px;
+                            }
+
+                            @media (max-width: 768px) {
+
+                                header.header .main-header .align-items-center .header-logo .logo-wrapper .logo-wrapper-inner img {
+                                    padding-top: 0;
+                                }
+                                header.header .main-header .align-items-center .header-logo .logo-wrapper .logo-wrapper-inner {
+                                    height: 56px;
+                                    position: relative;
+                                    bottom: 0;
+                                }
+                            }
+
+                            @media (max-width: 768px) {
+                                header.header .main-header .align-items-center .header-logo .logo-wrapper {
+                                    max-width: 640px;
+                                    width: 285px;
+                                }
+                            }
+                            @media (max-width: 375px) {
+                                header.header .main-header .align-items-center .header-logo .logo-wrapper {
+                                    width: 254px;
+                                    max-width: 260px;
+                                }
+                            }
+                            @media (max-width: 320px) {
+                                header.header .main-header .align-items-center .header-logo .logo-wrapper {
+                                    width: 240px;
+                                    max-width: 240px;
+                                }
+                            }
+                        </style>
                     </div>
                     <div class="header-mid">
                         <div class="list-top-item header_tim_kiem">
@@ -220,7 +273,8 @@
                                         </path>
                                     </svg>
                                 </span>
-                                <span class="count_item count_item_pr" id="miniCartCount" ng-if="cart.count > 0" ><% cart.count %></span>
+                                <span class="count_item count_item_pr" id="miniCartCount"
+                                    ng-if="cart.count > 0"><% cart.count %></span>
                                 <span class="item-title hidden-xs">Giỏ hàng</span>
                             </div>
 

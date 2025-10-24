@@ -75,6 +75,7 @@
             });
         });
     </script>
+
     <section class="section-index section_category">
         <div class="container">
             <div class="section-title side-left has-control">
@@ -113,7 +114,6 @@
         </div>
     </section>
     <script>
-        $(document).ready(function() {
             var swiper_category = null;
 
             function initSwiperCategory() {
@@ -169,8 +169,8 @@
             $(window).on('resize', function() {
                 toggleSwiperCategory();
             });
-        });
     </script>
+
     @if ($categorySpecialFlashsale)
         <section class="section-index section_product section_flash_sale">
             <div class="bg-section">
@@ -594,7 +594,6 @@
             </div>
         </section>
         <script>
-            $(document).ready(function() {
                 var swiper_feedback = null;
 
                 function initSwiperFeedback() {
@@ -655,7 +654,6 @@
                 $(window).on('resize', function() {
                     toggleSwiperFeedback();
                 });
-            });
         </script>
     @endif
 
@@ -719,7 +717,6 @@
         </section>
     @endforeach
     <script>
-        $(document).ready(function() {
             var swiper_blog = null;
 
             function initSwiperBlog() {
@@ -773,7 +770,6 @@
             $(window).on('resize', function() {
                 toggleSwiperBlog();
             });
-        });
     </script>
     <section class="section-index section_brands">
         <div class="container">
@@ -800,7 +796,6 @@
         </div>
     </section>
     <script>
-        $(document).ready(function() {
             var swiper_brand = null;
 
             function initSwiperBrand() {
@@ -856,7 +851,6 @@
             $(window).on('resize', function() {
                 toggleSwiperBrand();
             });
-        });
     </script>
 @endsection
 @push('script')
