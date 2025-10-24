@@ -245,6 +245,11 @@
                             slidesPerView: 5,
                             spaceBetween: 20,
                             slidesPerGroup: 1,
+                            loop: true,
+                            autoplay: {
+                                delay: 5000,
+                                disableOnInteraction: true
+                            },
                             navigation: {
                                 nextEl: '.section_flash_sale .swiper-button-next',
                                 prevEl: '.section_flash_sale .swiper-button-prev',
@@ -263,7 +268,7 @@
                                     spaceBetween: 20
                                 },
                                 1200: {
-                                    slidesPerView: 4.5,
+                                    slidesPerView: 4,
                                     spaceBetween: 20
                                 }
                             }
@@ -487,6 +492,11 @@
                             slidesPerView: 5,
                             spaceBetween: 20,
                             slidesPerGroup: 1,
+                            // loop: true,
+                            // autoplay: {
+                            //     delay: 5000,
+                            //     disableOnInteraction: true
+                            // },
                             navigation: {
                                 nextEl: '.section_product_1 .swiper-button-next',
                                 prevEl: '.section_product_1 .swiper-button-prev',
