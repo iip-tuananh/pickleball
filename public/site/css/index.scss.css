@@ -290,7 +290,7 @@
 .section_slider .swiper-slide {
     background: #ebebeb;
     overflow: hidden;
-    aspect-ratio: 1920/717;
+    /*aspect-ratio: 1920/717;*/
     position: relative
 }
 
