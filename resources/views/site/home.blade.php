@@ -29,7 +29,7 @@
                             src="{{ $banner->image ? $banner->image->path : 'https://placehold.co/1920x717' }}"
                             alt="{{ $banner->title }}" class="img-responsive center-block" loading="lazy" />
                     </picture>
-                    <div class="container-effect">
+                    {{-- <div class="container-effect">
                         <div class="title-2">
                             {{ $banner->title }}
                         </div>
@@ -45,7 +45,7 @@
                                 </path>
                             </svg>
                         </a>
-                    </div>
+                    </div> --}}
                 </div>
             @endforeach
         </div>
