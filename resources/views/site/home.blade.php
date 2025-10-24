@@ -54,25 +54,23 @@
         <div class="swiper-pagination"></div>
     </div>
     <script>
-        $(document).ready(function() {
-            var swiper_slider = new Swiper('.section_slider', {
-                speed: 1000,
-                effect: 'fade',
-                spaceBetween: 0,
-                grabCursor: true,
-                navigation: {
-                    nextEl: '.section_slider .swiper-button-next',
-                    prevEl: '.section_slider .swiper-button-prev',
-                },
-                autoplay: {
-                    delay: 5000,
-                    disableOnInteraction: true
-                },
-                pagination: {
-                    el: '.section_slider .swiper-pagination',
-                    clickable: true,
-                }
-            });
+        var swiper_slider = new Swiper('.section_slider', {
+            speed: 1000,
+            effect: 'fade',
+            spaceBetween: 0,
+            grabCursor: true,
+            navigation: {
+                nextEl: '.section_slider .swiper-button-next',
+                prevEl: '.section_slider .swiper-button-prev',
+            },
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: true
+            },
+            pagination: {
+                el: '.section_slider .swiper-pagination',
+                clickable: true,
+            }
         });
     </script>
 
