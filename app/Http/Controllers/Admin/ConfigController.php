@@ -108,6 +108,7 @@ class ConfigController extends Controller
 			$object->youtube = $request->youtube;
 			$object->location = $request->location;
 			$object->introduction = $request->introduction;
+			$object->showroom = $request->showroom;
 			$object->address = $request->address;
 			$object->tax_code = $request->tax_code;
 

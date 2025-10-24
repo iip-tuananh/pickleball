@@ -45,7 +45,7 @@ Route::group(['namespace' => 'Front'], function () {
     Route::get('/load-more/product','FrontController@loadMoreProduct')->name('front.product-load-more');
     Route::get('/get-product-quick-view','FrontController@getProductQuickView')->name('front.get-product-quick-view');
     Route::get('/filter-product','FrontController@filterProduct')->name('front.filter-product');
-    
+
     // giỏ hàng
     // Route::middleware('auth:client')->group(function () {
         Route::post('/{productId}/add-product-to-cart','CartController@addItem')->name('cart.add.item');
@@ -85,6 +85,9 @@ Route::group(['namespace' => 'Front'], function () {
 
     // review
     Route::post('/review/submit','FrontController@submitReview')->name('front.submit-review');
+
+    // showroom
+    Route::get('/he-thong-san-pickleball.html','FrontController@showroom')->name('front.showroom');
 
 });
 

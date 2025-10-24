@@ -135,7 +135,7 @@
                         </div>
                         <div class="sudes-header-stores hidden-xs">
                             <div class="frame-fix">
-                                <a href="#" title="Hệ thống sân pickleball"></a>
+                                <a href="{{ route('front.showroom') }}" title="Hệ thống sân pickleball"></a>
                                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
@@ -433,7 +433,7 @@
                 </div>
                 <div class="sudes-header-stores">
                     <div class="frame-fix">
-                        <a href="#" title="Hệ thống sân pickleball"></a>
+                        <a href="{{ route('front.showroom') }}" title="Hệ thống sân pickleball"></a>
                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path

@@ -135,6 +135,7 @@
                 zalo_chat: JSON.stringify(this._zalo_chat.map(z => z.submit_data)),
                 phone_switchboard: this.phone_switchboard,
                 introduction: this.introduction,
+                showroom: this.showroom,
                 tax_code: this.tax_code,
                 revenue_percent_5: this.revenue_percent_5,
                 revenue_percent_4: this.revenue_percent_4,
