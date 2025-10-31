@@ -86,8 +86,8 @@
                                     </span>
                         </div>
                     </div>
-                    <a class="btn btn-primary btn-stores" href="/he-thong-cua-hang"
-                       title="Chuỗi cửa hàng Sudes Sport">
+                    <a class="btn btn-primary btn-stores" href="{{ route('front.showroom') }}"
+                       title="Hệ thống sân pickleball">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                              fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
                             <path
@@ -95,7 +95,7 @@
                             <path
                                 d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z" />
                         </svg>
-                        <span>Chuỗi cửa hàng Sudes Sport</span>
+                        <span>Hệ thống sân Pickleball</span>
                     </a>
                 </div>
                 <div class="fot-col col-xs-12 col-md-4 col-lg-4 col-xl-2 footer-click">

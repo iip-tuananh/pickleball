@@ -74,7 +74,7 @@
         });
     </script>
 
-    <section class="section-index section_category">
+    {{-- <section class="section-index section_category">
         <div class="container">
             <div class="section-title side-left has-control">
                 <h2>
@@ -167,7 +167,7 @@
             $(window).on('resize', function() {
                 toggleSwiperCategory();
             });
-    </script>
+    </script> --}}
 
     @if ($categorySpecialFlashsale)
         <section class="section-index section_product section_flash_sale">
@@ -243,7 +243,7 @@
                     function initSwiperSale() {
                         swiper_sale = new Swiper('.swiper_sale', {
                             slidesPerView: 5,
-                            spaceBetween: 20,
+                            // spaceBetween: 10,
                             slidesPerGroup: 1,
                             loop: true,
                             autoplay: {
@@ -257,19 +257,15 @@
                             breakpoints: {
                                 768: {
                                     slidesPerView: 4,
-                                    spaceBetween: 20
                                 },
                                 992: {
                                     slidesPerView: 4,
-                                    spaceBetween: 20
                                 },
                                 1024: {
                                     slidesPerView: 3,
-                                    spaceBetween: 20
                                 },
                                 1200: {
                                     slidesPerView: 4,
-                                    spaceBetween: 20
                                 }
                             }
                         });
@@ -490,7 +486,7 @@
                     function initSwiperPro1() {
                         swiper_pro_1 = new Swiper('.swiper_pro_1', {
                             slidesPerView: 5,
-                            spaceBetween: 20,
+                            // spaceBetween: 20,
                             slidesPerGroup: 1,
                             // loop: true,
                             // autoplay: {
@@ -504,19 +500,19 @@
                             breakpoints: {
                                 768: {
                                     slidesPerView: 4,
-                                    spaceBetween: 20
+                                    // spaceBetween: 20
                                 },
                                 992: {
                                     slidesPerView: 4,
-                                    spaceBetween: 20
+                                    // spaceBetween: 20
                                 },
                                 1024: {
                                     slidesPerView: 3,
-                                    spaceBetween: 20
+                                    // spaceBetween: 20
                                 },
                                 1200: {
                                     slidesPerView: 4.5,
-                                    spaceBetween: 20
+                                    // spaceBetween: 20
                                 }
                             }
                         });
@@ -540,6 +536,136 @@
                     $(window).resize(toggleSwiperPro1);
                 }
                 lazyBlockProduct('section_product_1', '0px 0px -250px 0px', runSwiperPro1);
+            });
+        </script>
+        @if ($category->banner)
+            <section class="section-index section_big_banner">
+                <div class="container">
+                    <a href="{{ route('front.show-product-category', $category->slug) }}" title="{{ $category->name }}"
+                        class="big-banner">
+                        <picture>
+                            <source media="(max-width: 480px)"
+                                srcset="{{ $category->banner ? $category->banner->path : 'https://placehold.co/1780x385' }}">
+                            <img data-src="{{ $category->banner ? $category->banner->path : 'https://placehold.co/1780x385' }}"
+                                alt="{{ $category->name }}" width="1780" height="385" class="lazyload"
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC" />
+                        </picture>
+                    </a>
+                </div>
+            </section>
+        @endif
+    @endforeach
+
+    @foreach ($productCategories as $category)
+        <section class="section-index section_product section_product_2">
+            <div class="container">
+                <div class="row">
+                    <div class="block-title col-sm-12 col-xs-12 col-lg-3 col-xl-2">
+                        <div class="section-title side-left has-control">
+                            <h2>
+                                <a href="{{ route('front.show-product-category', $category->slug) }}"
+                                    title="{{ $category->name }}">
+                                    {{ $category->name }}
+                                </a>
+                            </h2>
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                        </div>
+                        <a href="{{ route('front.show-product-category', $category->slug) }}" title="Xem tất cả"
+                            class="btn btn-primary hidden-sm">
+                            <span>Xem tất cả</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z">
+                                </path>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="block-product-list col-sm-12 col-xs-12 col-lg-9 col-xl-10">
+                        <div class="swiper_pro_2 swiper_pro swiper-container">
+                            <div class="swiper-wrapper load-after" data-section="section_product_2">
+                                @foreach ($category->products as $product)
+                                    <div class="col-xl-3 col-lg-4 col-md-3 col-sm-6 col-xs-12 swiper-slide item_null">
+                                        @include('site.products.product_item', ['product' => $product])
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="view-more clearfix">
+                                <a href="{{ route('front.show-product-category', $category->slug) }}" title="Xem tất cả"
+                                    class="btn btn-primary">
+                                    <span>Xem tất cả</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                        fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd"
+                                            d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z">
+                                        </path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script>
+            $(document).ready(function($) {
+                function runSwiperPro2() {
+                    var swiper_pro_2 = null;
+
+                    function initSwiperPro2() {
+                        swiper_pro_2 = new Swiper('.swiper_pro_2', {
+                            slidesPerView: 5,
+                            // spaceBetween: 20,
+                            slidesPerGroup: 1,
+                            // loop: true,
+                            // autoplay: {
+                            //     delay: 5000,
+                            //     disableOnInteraction: true
+                            // },
+                            navigation: {
+                                nextEl: '.section_product_2 .swiper-button-next',
+                                prevEl: '.section_product_2 .swiper-button-prev',
+                            },
+                            breakpoints: {
+                                768: {
+                                    slidesPerView: 4,
+                                    // spaceBetween: 20
+                                },
+                                992: {
+                                    slidesPerView: 4,
+                                    // spaceBetween: 20
+                                },
+                                1024: {
+                                    slidesPerView: 3,
+                                    // spaceBetween: 20
+                                },
+                                1200: {
+                                    slidesPerView: 4.5,
+                                    // spaceBetween: 20
+                                }
+                            }
+                        });
+                    }
+
+                    function destroySwiperPro2() {
+                        if (swiper_pro_2) {
+                            swiper_pro_2.destroy(true, true);
+                            swiper_pro_2 = null;
+                        }
+                    }
+
+                    function toggleSwiperPro2() {
+                        if ($(window).width() <= 767 && swiper_pro_2) {
+                            destroySwiperPro2();
+                        } else if ($(window).width() > 767 && !swiper_pro_2) {
+                            initSwiperPro2();
+                        }
+                    }
+                    toggleSwiperPro2();
+                    $(window).resize(toggleSwiperPro2);
+                }
+                lazyBlockProduct('section_product_2', '0px 0px -250px 0px', runSwiperPro2);
             });
         </script>
         @if ($category->banner)
@@ -779,7 +905,8 @@
                 toggleSwiperBlog();
             });
     </script>
-    <section class="section-index section_brands">
+
+    {{-- <section class="section-index section_brands">
         <div class="container">
             <div class="section-title side-left has-control">
                 <h2>
@@ -859,7 +986,7 @@
             $(window).on('resize', function() {
                 toggleSwiperBrand();
             });
-    </script>
+    </script> --}}
 @endsection
 @push('script')
 @endpush

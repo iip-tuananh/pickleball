@@ -111,16 +111,16 @@ class FrontController extends Controller
         ->where('show_home_page', 1)
         ->orderBy('sort_order')
         ->get();
-        // foreach ($productCategories as $category) {
-        //     $category_parent_id = $category->parent ? $category->parent->id : null;
-        //     $arr_category_id = array_merge($category->childs->pluck('id')->toArray(), [$category->id, $category_parent_id]);
-        //     if ($category->childs) {
-        //         foreach ($category->childs as $child) {
-        //             $arr_category_id = array_merge($arr_category_id, $child->childs->pluck('id')->toArray());
-        //         }
-        //     }
-        //     $category->products = Product::query()->where('status', 1)->whereIn('cate_id', $arr_category_id)->inRandomOrder()->limit(12)->select(['id', 'name', 'slug', 'price', 'base_price', 'unit_id', 'cate_id'])->get();
-        // }
+        foreach ($productCategories as $category) {
+            $category_parent_id = $category->parent ? $category->parent->id : null;
+            $arr_category_id = array_merge($category->childs->pluck('id')->toArray(), [$category->id, $category_parent_id]);
+            if ($category->childs) {
+                foreach ($category->childs as $child) {
+                    $arr_category_id = array_merge($arr_category_id, $child->childs->pluck('id')->toArray());
+                }
+            }
+            $category->products = Product::query()->where('status', 1)->whereIn('cate_id', $arr_category_id)->inRandomOrder()->limit(12)->select(['id', 'name', 'slug', 'price', 'base_price', 'unit_id', 'cate_id'])->get();
+        }
         $data['productCategories'] = $productCategories;
 
         // $data['vouchers'] = Voucher::query()->where('status', 1)->where('quantity', '>', 0)->where('to_date', '>=', now())->orderBy('created_at', 'desc')->get();
