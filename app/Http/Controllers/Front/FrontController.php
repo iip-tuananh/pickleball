@@ -58,7 +58,18 @@ class FrontController extends Controller
             ->has('posts')
             ->where('type', 20)
             ->where('show_home_page', 1)
+            ->where('order_number', "!=", 1)
             ->orderBy('order_number')->get();
+        $data['categorySpecialPostNumber1'] = CategorySpecial::query()->with([
+            'posts' => function ($q) {
+                $q->where('status', 1);
+            }
+        ])
+            ->has('posts')
+            ->where('type', 20)
+            ->where('show_home_page', 1)
+            ->where('order_number', 1)
+            ->first();
         $data['categorySpecial'] = CategorySpecial::query()->with([
             'products' => function ($q) {
                 $q->with([

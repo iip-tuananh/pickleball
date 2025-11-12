@@ -137,7 +137,7 @@
 
 .section_slider {
     margin-top: 0px;
-    /* margin-bottom: 30px; */
+    margin-bottom: 30px;
 }
 
 .section_slider .swiper-pagination-bullets {
@@ -1046,13 +1046,14 @@
 }
 
 .section_flash_sale .bg-section {
-    background: var(--mainColor) url(../images/section_sale_bg2.jpg?1758009136246) no-repeat center/cover;
+    /* background: var(--mainColor) url(../images/section_sale_bg2.jpg?1758009136246) no-repeat center/cover; */
     padding: 30px 0;
-    position: relative
+    position: relative;
+    background: #f9f9f9;
 }
 
 .section_flash_sale .bg-section .block-countdown .section-title.has-control h2 a {
-    color: #fff
+    color: var(--textColor);
 }
 
 .section_flash_sale .bg-section .block-countdown .section-title.has-control h2 a:hover {
@@ -1113,7 +1114,7 @@
     font-weight: 600;
     font-size: 1.8rem;
     margin-bottom: 8px;
-    color: #fff;
+    color: var(--textColor);
     line-height: normal
 }
 

@@ -5402,7 +5402,7 @@ footer.footer .clicked {
 
 .item_product_main .product-action .product-bottom .button-product button.add_to_cart,.item_product_main .product-action .product-bottom .button-product button.btn-views {
     color: #333;
-    background: var(--subColor)
+    background: #79bb05;
 }
 
 .item_product_main .product-action .product-bottom .button-product button.add_to_cart:hover,.item_product_main .product-action .product-bottom .button-product button.btn-views:hover {

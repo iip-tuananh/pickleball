@@ -161,7 +161,12 @@
                                             </ul>
                                         </li>
 
-                                        <li class="nav-item ">
+                                        <li class="nav-item hidden-lg hidden-md hidden-sm hidden-xs">
+                                            <a class="nav-link" href="{{ route('front.about-us') }}" title="Về chúng tôi">
+                                                Về chúng tôi
+                                            </a>
+                                        </li>
+                                        <li class="nav-item hidden-lg hidden-md hidden-sm hidden-xs">
                                             <a class="nav-link" href="{{ route('front.contact-us') }}" title="Liên hệ chúng tôi">
                                                 Liên hệ
                                             </a>
@@ -191,7 +196,7 @@
                                     display: flex;
                                     align-items: center;
                                     justify-content: center;
-                                    gap: 40px;
+                                    gap: 20px;
                                 }
 
                                 .header-mid-menu a {
@@ -574,6 +579,11 @@
                         </ul>
                     </li>
 
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ route('front.about-us') }}" title="Về chúng tôi">
+                            Về chúng tôi
+                        </a>
+                    </li>
                     <li class="nav-item ">
                         <a class="nav-link" href="{{ route('front.contact-us') }}" title="Liên hệ chúng tôi">
                             Liên hệ chúng tôi
