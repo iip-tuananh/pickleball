@@ -21,7 +21,7 @@ class MenuHomePageComposer
     {
         $productCategories = Category::query()->with([
             'childs' => function ($query) {
-                $query->with(['childs']);
+                $query->with(['childs'])->orderBy('sort_order');
             }
         ])
         ->where(['type' => 1, 'parent_id' => 0])
