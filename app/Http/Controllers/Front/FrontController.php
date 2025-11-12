@@ -524,12 +524,21 @@ class FrontController extends Controller
     public function listBlog(Request $request, $slug)
     {
         $category = PostCategory::where('slug', $slug)->first();
-        $data['blogs'] = Post::with(['image'])->where(['status' => 1, 'cate_id' => $category->id])
+        if ($category) {
+            $data['blogs'] = Post::with(['image'])->where(['status' => 1, 'cate_id' => $category->id])
             ->orderBy('id', 'DESC')
             ->select(['id', 'name', 'intro', 'created_at', 'slug', 'time'])
             ->paginate(99999);
 
-        $data['cate_title'] = $category->name;
+            $data['cate_title'] = $category->name;
+        } else {
+            $category = CategorySpecial::findBySlug($slug);
+            $arr_post_ids = $category->posts()->pluck('posts.id')->toArray();
+            $data['blogs'] = Post::with(['image'])->where(['status' => 1])->whereIn('id', $arr_post_ids)->orderBy('id', 'DESC')->select(['id', 'name', 'intro', 'created_at', 'slug', 'time'])->paginate(99999);
+
+            $data['cate_title'] = $category->name;
+        }
+
         $data['categories'] = PostCategory::with([
             'posts' => function ($query) {
                 $query->where(['status' => 1])->get();
@@ -548,6 +557,7 @@ class FrontController extends Controller
             ->where(['type' => 1, 'parent_id' => 0])
             ->orderBy('sort_order')
             ->get();
+
         return view('site.blogs.list', $data);
     }
 

@@ -28,6 +28,17 @@ class MenuHomePageComposer
         ->orderBy('sort_order')
         ->get();
 
+        $categorySpecialPostNumberOne = CategorySpecial::query()->with([
+            'posts' => function ($q) {
+                $q->where('status', 1);
+            }
+        ])
+            ->has('posts')
+            ->where('type', 20)
+            ->where('show_home_page', 1)
+            ->where('order_number', 1)
+            ->first();
+
         // $categorySpecialFlashsale = CategorySpecial::query()
         // ->has('products')
         // ->where('type', 10)
@@ -60,6 +71,6 @@ class MenuHomePageComposer
 
         $postCategories = PostCategory::query()->where(['parent_id' => 0])->orderBy('sort_order')->get();
 
-        $view->with(['productCategories' => $productCategories, 'postCategories' => $postCategories, 'policies' => $policies]);
+        $view->with(['productCategories' => $productCategories, 'postCategories' => $postCategories, 'policies' => $policies, 'categorySpecialPostNumberOne' => $categorySpecialPostNumberOne]);
     }
 }

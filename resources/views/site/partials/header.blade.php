@@ -103,6 +103,12 @@
                             <div class="navigation-horizontal">
                                 <div class="col-menu">
                                     <ul id="nav-mid-col" class="nav-col">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('front.list-blog', $categorySpecialPostNumberOne->slug) }}" title="{{ $categorySpecialPostNumberOne->name }}">
+                                                {{ $categorySpecialPostNumberOne->name }}
+                                            </a>
+                                        </li>
+
                                         @foreach ($productCategories as $category)
                                             <li class="nav-item has-childs  ">
                                                 <a href="{{ route('front.show-product-category', $category->slug) }}"
