@@ -58,7 +58,18 @@ class FrontController extends Controller
             ->has('posts')
             ->where('type', 20)
             ->where('show_home_page', 1)
+            ->where('order_number', "!=", 1)
             ->orderBy('order_number')->get();
+        $data['categorySpecialPostNumber1'] = CategorySpecial::query()->with([
+            'posts' => function ($q) {
+                $q->where('status', 1);
+            }
+        ])
+            ->has('posts')
+            ->where('type', 20)
+            ->where('show_home_page', 1)
+            ->where('order_number', 1)
+            ->first();
         $data['categorySpecial'] = CategorySpecial::query()->with([
             'products' => function ($q) {
                 $q->with([
@@ -111,16 +122,16 @@ class FrontController extends Controller
         ->where('show_home_page', 1)
         ->orderBy('sort_order')
         ->get();
-        // foreach ($productCategories as $category) {
-        //     $category_parent_id = $category->parent ? $category->parent->id : null;
-        //     $arr_category_id = array_merge($category->childs->pluck('id')->toArray(), [$category->id, $category_parent_id]);
-        //     if ($category->childs) {
-        //         foreach ($category->childs as $child) {
-        //             $arr_category_id = array_merge($arr_category_id, $child->childs->pluck('id')->toArray());
-        //         }
-        //     }
-        //     $category->products = Product::query()->where('status', 1)->whereIn('cate_id', $arr_category_id)->inRandomOrder()->limit(12)->select(['id', 'name', 'slug', 'price', 'base_price', 'unit_id', 'cate_id'])->get();
-        // }
+        foreach ($productCategories as $category) {
+            $category_parent_id = $category->parent ? $category->parent->id : null;
+            $arr_category_id = array_merge($category->childs->pluck('id')->toArray(), [$category->id, $category_parent_id]);
+            if ($category->childs) {
+                foreach ($category->childs as $child) {
+                    $arr_category_id = array_merge($arr_category_id, $child->childs->pluck('id')->toArray());
+                }
+            }
+            $category->products = Product::query()->where('status', 1)->whereIn('cate_id', $arr_category_id)->inRandomOrder()->limit(12)->select(['id', 'name', 'slug', 'price', 'base_price', 'unit_id', 'cate_id'])->get();
+        }
         $data['productCategories'] = $productCategories;
 
         // $data['vouchers'] = Voucher::query()->where('status', 1)->where('quantity', '>', 0)->where('to_date', '>=', now())->orderBy('created_at', 'desc')->get();
@@ -513,12 +524,21 @@ class FrontController extends Controller
     public function listBlog(Request $request, $slug)
     {
         $category = PostCategory::where('slug', $slug)->first();
-        $data['blogs'] = Post::with(['image'])->where(['status' => 1, 'cate_id' => $category->id])
+        if ($category) {
+            $data['blogs'] = Post::with(['image'])->where(['status' => 1, 'cate_id' => $category->id])
             ->orderBy('id', 'DESC')
             ->select(['id', 'name', 'intro', 'created_at', 'slug', 'time'])
             ->paginate(99999);
 
-        $data['cate_title'] = $category->name;
+            $data['cate_title'] = $category->name;
+        } else {
+            $category = CategorySpecial::findBySlug($slug);
+            $arr_post_ids = $category->posts()->pluck('posts.id')->toArray();
+            $data['blogs'] = Post::with(['image'])->where(['status' => 1])->whereIn('id', $arr_post_ids)->orderBy('id', 'DESC')->select(['id', 'name', 'intro', 'created_at', 'slug', 'time'])->paginate(99999);
+
+            $data['cate_title'] = $category->name;
+        }
+
         $data['categories'] = PostCategory::with([
             'posts' => function ($query) {
                 $query->where(['status' => 1])->get();
@@ -537,6 +557,7 @@ class FrontController extends Controller
             ->where(['type' => 1, 'parent_id' => 0])
             ->orderBy('sort_order')
             ->get();
+
         return view('site.blogs.list', $data);
     }
 

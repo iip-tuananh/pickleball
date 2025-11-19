@@ -1,6 +1,6 @@
 <header class="header" ng-controller="headerPartial" ng-cloak>
 
-    <div class="topbar">
+    {{-- <div class="topbar">
         <div class="container">
             <div class="header-promo">
                 <ul class="ul-default promo-list js-promo">
@@ -20,7 +20,7 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="main-header">
         <div class="container">
             <div class="box-hearder">
@@ -37,22 +37,23 @@
                         <a href="{{ route('front.home-page') }}" class="logo-wrapper" title="{{ $config->web_title }}">
                             <div class="logo-wrapper-inner">
                                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAANSURBVBhXYzh8+PB/AAffA0nNPuCLAAAAAElFTkSuQmCC"
-                                        data-src="{{ $config->image ? $config->image->path : 'https://placehold.co/250x43' }}"
-                                        alt="{{ $config->web_title }}" class="lazyload">
+                                    data-src="{{ $config->image ? $config->image->path : 'https://placehold.co/250x43' }}"
+                                    alt="{{ $config->web_title }}" class="lazyload">
                             </div>
                         </a>
                         <style>
                             header.header .main-header .align-items-center .header-logo .logo-wrapper .logo-wrapper-inner {
-                                position: absolute;
+                                /* position: absolute; */
                                 bottom: -15px;
                                 left: 0;
                                 right: 0;
                                 z-index: 1;
-                                width: 100%;
-                                height: 110px;
+                                /* width: 100%; */
+                                /* height: 110px; */
                                 margin: auto;
                                 background: #022d3a;
                             }
+
                             header.header .main-header .align-items-center .header-logo .logo-wrapper .logo-wrapper-inner img {
                                 width: 100%;
                                 height: 100%;
@@ -67,6 +68,7 @@
                                 header.header .main-header .align-items-center .header-logo .logo-wrapper .logo-wrapper-inner img {
                                     padding-top: 0;
                                 }
+
                                 header.header .main-header .align-items-center .header-logo .logo-wrapper .logo-wrapper-inner {
                                     height: 56px;
                                     position: relative;
@@ -80,12 +82,14 @@
                                     width: 285px;
                                 }
                             }
+
                             @media (max-width: 375px) {
                                 header.header .main-header .align-items-center .header-logo .logo-wrapper {
                                     width: 254px;
                                     max-width: 260px;
                                 }
                             }
+
                             @media (max-width: 320px) {
                                 header.header .main-header .align-items-center .header-logo .logo-wrapper {
                                     width: 240px;
@@ -94,7 +98,188 @@
                             }
                         </style>
                     </div>
-                    <div class="header-mid">
+                    <div class="header-mid d-flex align-items-center">
+                        <div class="header-mid-menu">
+                            <div class="navigation-horizontal">
+                                <div class="col-menu">
+                                    <ul id="nav-mid-col" class="nav-col">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('front.list-blog', $categorySpecialPostNumberOne->slug) }}" title="{{ $categorySpecialPostNumberOne->name }}">
+                                                {{ $categorySpecialPostNumberOne->name }}
+                                            </a>
+                                        </li>
+
+                                        @foreach ($productCategories as $category)
+                                            <li class="nav-item has-childs  ">
+                                                <a href="{{ route('front.show-product-category', $category->slug) }}"
+                                                    class="nav-link" title="{{ $category->name }}">
+                                                    {{ $category->name }}
+                                                    @if ($category->childs->count())
+                                                        <i class="open_mnu down_icon"></i>
+                                                    @endif
+                                                </a>
+                                                @if ($category->childs->count())
+                                                    <ul class="dropdown-menu">
+                                                        @foreach ($category->childs as $child)
+                                                            <li class="dropdown-submenu nav-item-lv2 has-childs2">
+                                                                <a class="nav-link"
+                                                                    href="{{ route('front.show-product-category', $child->slug) }}"
+                                                                    title="{{ $child->name }}">
+                                                                    {{ $child->name }}
+                                                                    @if ($child->childs->count())
+                                                                        <i class="open_mnu down_icon"></i>
+                                                                    @endif
+                                                                </a>
+                                                                @if ($child->childs->count())
+                                                                    <ul class="dropdown-menu">
+                                                                        @foreach ($child->childs as $chi)
+                                                                            <li class="nav-item-lv3">
+                                                                                <a class="nav-link"
+                                                                                    href="{{ route('front.show-product-category', $chi->slug) }}"
+                                                                                    title="{{ $chi->name }}">{{ $chi->name }}</a>
+                                                                            </li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                @endif
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
+                                            </li>
+                                        @endforeach
+                                        <li class="nav-item has-childs  ">
+                                            <a href="javascript:;" class="nav-link" title="Tin tức">
+                                                Tin tức
+                                                <i class="open_mnu down_icon"></i>
+                                            </a>
+                                            <ul class="dropdown-menu">
+
+                                                @foreach ($postCategories as $postCategory)
+                                                    <li class="nav-item-lv2">
+                                                        <a class="nav-link" href="{{ route('front.list-blog', $postCategory->slug) }}"
+                                                            title="{{ $postCategory->name }}">{{ $postCategory->name }}</a>
+                                                    </li>
+                                                @endforeach
+                                                <li class="nav-item-lv2">
+                                                    <a class="nav-link" href="{{ route('front.showroom') }}"
+                                                        title="Hệ thống sân Pickleball">Hệ thống sân Pickleball</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+                                        <li class="nav-item hidden-lg hidden-md hidden-sm hidden-xs">
+                                            <a class="nav-link" href="{{ route('front.about-us') }}" title="Về chúng tôi">
+                                                Về chúng tôi
+                                            </a>
+                                        </li>
+                                        <li class="nav-item hidden-lg hidden-md hidden-sm hidden-xs">
+                                            <a class="nav-link" href="{{ route('front.contact-us') }}" title="Liên hệ chúng tôi">
+                                                Liên hệ
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <style>
+                                .header-mid-menu {
+                                    width: 80%;
+                                    margin: 0 auto;
+                                }
+
+                                @media (max-width: 991px) {
+                                    .header-mid-menu {
+                                        display: none;
+                                    }
+                                }
+                                /* --- Reset cơ bản --- */
+                                .header-mid-menu ul {
+                                    list-style: none;
+                                    margin: 0;
+                                    padding: 0;
+                                }
+
+                                .header-mid-menu ul.nav-col {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    gap: 20px;
+                                }
+
+                                .header-mid-menu a {
+                                    text-decoration: none;
+                                    display: block;
+                                    /* padding: 8px 15px; */
+                                    color: #333;
+                                    transition: color 0.3s ease;
+                                }
+
+                                .header-mid-menu .nav-item .nav-link {
+                                    font-size: 18px;
+                                    font-weight: 600;
+                                    color: #ffffff;
+                                }
+
+                                .header-mid-menu .nav-item-lv2 .nav-link {
+                                    color: #333;
+                                    font-size: 16px;
+                                    font-weight: 500;
+                                }
+
+                                /* --- Cấu trúc dropdown --- */
+                                .header-mid-menu .nav-item {
+                                    position: relative;
+                                }
+
+                                .header-mid-menu .dropdown-menu {
+                                    position: absolute;
+                                    top: 100%;
+                                    left: 0;
+                                    min-width: 200px;
+                                    background: #fff;
+                                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+                                    opacity: 0;
+                                    visibility: hidden;
+                                    transform: translateY(10px);
+                                    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+                                    z-index: 999;
+                                }
+
+                                /* --- Hiển thị khi hover --- */
+                                .header-mid-menu .nav-item:hover>.dropdown-menu {
+                                    opacity: 1;
+                                    visibility: visible;
+                                    transform: translateY(0);
+                                }
+
+                                /* --- Dropdown cấp 2 --- */
+                                .header-mid-menu .dropdown-submenu {
+                                    position: relative;
+                                }
+
+                                .header-mid-menu .dropdown-submenu>.dropdown-menu {
+                                    top: 0;
+                                    left: 100%;
+                                    margin-left: 2px;
+                                }
+
+                                /* --- Hover cấp 2 mượt mà --- */
+                                .header-mid-menu .dropdown-submenu:hover>.dropdown-menu {
+                                    opacity: 1;
+                                    visibility: visible;
+                                    transform: translateY(0);
+                                }
+
+                                /* --- Tuỳ chọn thẩm mỹ --- */
+                                .header-mid-menu .dropdown-menu li a {
+                                    padding: 8px 12px;
+                                    white-space: nowrap;
+                                }
+
+                                .header-mid-menu .dropdown-menu li a:hover {
+                                    background-color: #f8f9fa;
+                                }
+                            </style>
+                        </div>
                         <div class="list-top-item header_tim_kiem">
                             <form action="{{ route('front.search') }}" method="get"
                                 class="header-search-form input-group search-bar" role="search">
@@ -169,6 +354,7 @@
                                 </div>
                             </form>
                         </div>
+
                     </div>
                     <div class="header-right">
                         <div class="sudes-header-hotline">
@@ -186,7 +372,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="sudes-header-stores hidden-xs">
+                        {{-- <div class="sudes-header-stores hidden-xs">
                             <div class="frame-fix">
                                 <a href="{{ route('front.showroom') }}" title="Hệ thống sân pickleball"></a>
                                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none"
@@ -200,72 +386,11 @@
                                     <span class="acc-text">Pickleball</span>
                                 </div>
                             </div>
-                        </div>
-
-                        {{--                        <div class="sudes-header-account header-action_account"> --}}
-                        {{--                            <div class="frame-fix"> --}}
-                        {{--                                <a href="javascript:;" class="header-account" aria-label="Tài khoản" --}}
-                        {{--                                   title="Tài khoản"></a> --}}
-                        {{--                                <svg aria-hidden="true" class="svg-icon tool-icon" viewBox="0 0 32 32"> --}}
-                        {{--                                    <path --}}
-                        {{--                                        d="M7.164 29.986a1 1 0 01-1.148-1.165l2-11A1 1 0 019 17h14a1 1 0 01.97.757l2 8a1 1 0 01-.806 1.23l-18 3zm1.074-2.206l15.53-2.588L22.218 19H9.835l-1.597 8.78zM16 15c-3.314 0-6-2.91-6-6.5S12.686 2 16 2s6 2.91 6 6.5-2.686 6.5-6 6.5zm0-2c2.172 0 4-1.98 4-4.5S18.172 4 16 4c-2.172 0-4 1.98-4 4.5s1.828 4.5 4 4.5z"> --}}
-                        {{--                                    </path> --}}
-                        {{--                                </svg> --}}
-                        {{--                                <div class="text-box"> --}}
-                        {{--                                    <span class="acc-text-small hidden-xs">Thông tin</span> --}}
-                        {{--                                    <span class="acc-text"> --}}
-                        {{--                                            Tài khoản --}}
-                        {{--                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" --}}
-                        {{--                                                 fill="currentColor" class="bi bi-caret-down-fill" --}}
-                        {{--                                                 viewBox="0 0 16 16"> --}}
-                        {{--                                                <path --}}
-                        {{--                                                    d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" /> --}}
-                        {{--                                            </svg> --}}
-                        {{--                                        </span> --}}
-                        {{--                                </div> --}}
-                        {{--                            </div> --}}
-                        {{--                            <ul> --}}
-                        {{--                                <li class="li-account"> --}}
-                        {{--                                    <a rel="nofollow" href="/account/login" title="Đăng nhập"> --}}
-                        {{--                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" --}}
-                        {{--                                             fill="currentColor" class="bi bi-box-arrow-in-right" --}}
-                        {{--                                             viewBox="0 0 16 16"> --}}
-                        {{--                                            <path fill-rule="evenodd" --}}
-                        {{--                                                  d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z" /> --}}
-                        {{--                                            <path fill-rule="evenodd" --}}
-                        {{--                                                  d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" /> --}}
-                        {{--                                        </svg> --}}
-                        {{--                                        Đăng nhập --}}
-                        {{--                                    </a> --}}
-                        {{--                                </li> --}}
-                        {{--                                <li class="li-account"> --}}
-                        {{--                                    <a rel="nofollow" href="/account/register" title="Đăng ký"> --}}
-                        {{--                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" --}}
-                        {{--                                             fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16"> --}}
-                        {{--                                            <path --}}
-                        {{--                                                d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" /> --}}
-                        {{--                                            <path fill-rule="evenodd" --}}
-                        {{--                                                  d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" /> --}}
-                        {{--                                        </svg> --}}
-                        {{--                                        Đăng ký --}}
-                        {{--                                    </a> --}}
-                        {{--                                </li> --}}
-                        {{--                                <li class="li-account"> --}}
-                        {{--                                    <a rel="nofollow" href="/danh-sach-yeu-thich" title="Danh sách yêu thích"> --}}
-                        {{--                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" --}}
-                        {{--                                             fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16"> --}}
-                        {{--                                            <path --}}
-                        {{--                                                d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" /> --}}
-                        {{--                                        </svg> --}}
-                        {{--                                        Danh sách yêu thích (<span class="js-wishlist-count">0</span>) --}}
-                        {{--                                    </a> --}}
-                        {{--                                </li> --}}
-                        {{--                            </ul> --}}
-                        {{--                        </div> --}}
-
+                        </div> --}}
                         <div class="sudes-header-cart header-action_cart" id="headerMiniCart">
                             <div class="frame-fix">
-                                <a class="a-hea" href="/cart" aria-label="Giỏ hàng" title="Giỏ hàng"></a>
+                                <a class="a-hea" href="{{ route('cart.index') }}" aria-label="Giỏ hàng"
+                                    title="Giỏ hàng"></a>
                                 <span class="box-icon" aria-hidden="true">
                                     <svg class="svg-icon" viewBox="0 0 32 32">
                                         <path
@@ -377,7 +502,7 @@
                     @endforeach
                 </ul>
                 <ul id="nav" class="nav">
-                    <li class="nav-item ">
+                    {{-- <li class="nav-item ">
                         <a class="nav-link" href="{{ route('front.about-us') }}" title="Về Sudes Sport">
                             Về {{ $config->web_title }}
                         </a>
@@ -397,7 +522,7 @@
                                 </li>
                             @endforeach
                         </ul>
-                    </li>
+                    </li> --}}
 
                     {{-- <li class="nav-item has-childs  ">
                         <a href="/huong-dan-mua-hang" class="nav-link" title="Hướng dẫn mua hàng">
@@ -460,6 +585,11 @@
                         </ul>
                     </li>
 
+                    <li class="nav-item ">
+                        <a class="nav-link" href="{{ route('front.about-us') }}" title="Về chúng tôi">
+                            Về chúng tôi
+                        </a>
+                    </li>
                     <li class="nav-item ">
                         <a class="nav-link" href="{{ route('front.contact-us') }}" title="Liên hệ chúng tôi">
                             Liên hệ chúng tôi
